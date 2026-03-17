@@ -1,4 +1,3 @@
-/* ── Transparent overlay — OBS composites this over everything ── */
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto+Condensed:wght@400;700&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -9,163 +8,228 @@ html, body {
   overflow: hidden;
 }
 
-/* ── Flash overlay (full screen, fires on alert entry) ── */
-.alert-flash {
-  position: fixed; inset: 0;
-  background: var(--flash-color, #FF7919);
-  opacity: 0; pointer-events: none;
-  z-index: 10;
+/* ── Screen-border ring flash ── */
+.alert-ring {
+  position: fixed; inset: 0; pointer-events: none; z-index: 50;
+  box-shadow: inset 0 0 0 0px var(--ring-color, #CC0000);
+  transition: box-shadow 0.55s ease;
 }
-.alert-flash.on  { opacity: 0.25; transition: none; }
-.alert-flash.off { opacity: 0; transition: opacity 0.35s ease; }
+.alert-ring.impact {
+  box-shadow: inset 0 0 0 16px var(--ring-color, #CC0000);
+  transition: box-shadow 0s;
+}
 
-/* ── Container: centered at bottom ── */
+/* ── Container: bottom of screen ── */
 .alert-container {
   position: fixed;
-  bottom: 90px; /* above a standard OBS ticker */
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(920px, 92vw);
+  bottom: 80px; left: 0; right: 0;
   pointer-events: none;
-  z-index: 20;
+  z-index: 40;
 }
 
-/* ── Alert card ── */
+/* ── Card: two-row stacked layout ── */
 .alert-card {
-  display: flex;
-  align-items: stretch;
   width: 100%;
-  background: rgba(6, 6, 10, 0.97);
-  border-top: 3px solid var(--color, #FF7919);
+  /* 3px accent border along top edge */
+  border-top: 3px solid var(--color, #CC0000);
+}
+
+/* ── Row wrappers: clip the sliding inner content ── */
+.alert-top-wrap,
+.alert-bottom-wrap {
   overflow: hidden;
-  position: relative;
-  box-shadow: 0 -4px 40px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.05);
+}
+.alert-top-wrap    { height: 70px; }
+.alert-bottom-wrap { height: 52px; }
 
-  /* Start below screen, hidden */
-  transform: translateY(120%);
-  opacity: 0;
-  transition: transform 0.5s cubic-bezier(0.34, 1.08, 0.64, 1), opacity 0.25s ease;
-}
-.alert-card.slide-in {
-  transform: translateY(0);
-  opacity: 1;
-}
-.alert-card.slide-out {
-  transform: translateY(130%);
-  opacity: 0;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 1, 1), opacity 0.3s ease;
-}
+/* ── TOP ROW: colored — event type ── */
+.alert-top {
+  height: 70px;
+  background: var(--color, #CC0000);
+  display: flex; align-items: center;
+  position: relative; overflow: hidden;
 
-/* ── Left badge section ── */
-.alert-badge {
+  /* Pixel/LED grid texture (the SportsCenter scoreboard look) */
+  background-image:
+    linear-gradient(rgba(0,0,0,0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.12) 1px, transparent 1px);
+  background-size: 7px 7px;
+  background-color: var(--color, #CC0000);
+
+  /* Slides in from LEFT */
+  transform: translateX(-100%);
+  transition: transform 0.32s cubic-bezier(0.2, 0, 0.05, 1);
+}
+.alert-card.animate-in  .alert-top { transform: translateX(0); }
+.alert-card.animate-out .alert-top { transform: translateX(-100%); transition-duration: 0.22s; }
+
+/* SC-style network badge */
+.top-badge {
   flex-shrink: 0;
-  width: 140px;
-  background: var(--color, #FF7919);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  gap: 4px;
-  padding: 16px 12px;
-  position: relative;
-  overflow: hidden;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #444, #111);
+  border: 2px solid rgba(255,255,255,0.2);
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 18px 0 16px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.8);
+  position: relative; z-index: 2;
 }
 
-/* Scanline texture on badge */
-.alert-badge::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 3px,
-    rgba(0,0,0,0.12) 3px,
-    rgba(0,0,0,0.12) 4px
-  );
+/* Vertical separator */
+.top-sep {
+  width: 3px; height: 44px;
+  background: rgba(255,255,255,0.25);
+  flex-shrink: 0;
+  margin-right: 20px;
+  position: relative; z-index: 2;
+}
+
+/* Event type label — the BIG text */
+.top-type {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(1.7rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow:
+    2px 2px 0 rgba(0,0,0,0.4),
+    0 0 30px rgba(255,255,255,0.15);
+  position: relative; z-index: 2;
+  flex: 1;
+}
+
+/* Decorative speed lines — bottom-right of top row */
+.top-lines {
+  position: absolute; right: 0; top: 0; bottom: 0;
+  width: 35%;
+  display: flex; align-items: center; justify-content: flex-end;
+  gap: 5px;
+  padding-right: 20px;
   pointer-events: none;
 }
-
-.alert-badge-dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: rgba(255,255,255,0.9);
-  box-shadow: 0 0 6px rgba(255,255,255,0.7);
-  animation: badgeBlink 0.9s ease-in-out infinite;
-  margin-bottom: 2px;
+.speed-line {
+  height: 60%;
+  background: rgba(255,255,255,0.1);
+  transform: skewX(-20deg);
 }
-@keyframes badgeBlink {
+.speed-line:nth-child(1) { width: 3px; }
+.speed-line:nth-child(2) { width: 6px; }
+.speed-line:nth-child(3) { width: 20px; }
+.speed-line:nth-child(4) { width: 10px; }
+.speed-line:nth-child(5) { width: 4px; }
+.speed-line:nth-child(6) { width: 60px; opacity: 0.06; }
+
+/* Live dot in top-right corner */
+.top-live {
+  position: absolute; right: 20px; top: 10px;
+  display: flex; align-items: center; gap: 5px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.55rem; font-weight: 700;
+  letter-spacing: 0.25em;
+  color: rgba(0,0,0,0.5);
+  z-index: 3;
+}
+.top-live-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(0,0,0,0.4);
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.2);
+  animation: topLiveBlink 1s ease-in-out infinite;
+}
+@keyframes topLiveBlink {
   0%, 100% { opacity: 1; }
   50%       { opacity: 0.3; }
 }
 
-.alert-badge-icon {
-  font-size: 1.8rem; line-height: 1;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-}
+/* ── BOTTOM ROW: dark — name + action ── */
+.alert-bottom {
+  height: 52px;
+  background: rgba(8, 8, 14, 0.97);
+  display: flex; align-items: center;
+  padding: 0 22px;
+  gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
 
-.alert-badge-label {
+  /* Slides in from RIGHT */
+  transform: translateX(100%);
+  transition: transform 0.32s cubic-bezier(0.2, 0, 0.05, 1) 0.04s; /* 40ms after top */
+}
+.alert-card.animate-in  .alert-bottom { transform: translateX(0); }
+.alert-card.animate-out .alert-bottom { transform: translateX(100%); transition-duration: 0.22s; transition-delay: 0s; }
+
+/* Name: colored, large */
+.bottom-name {
   font-family: 'Oswald', sans-serif;
-  font-size: 0.58rem; font-weight: 700;
-  letter-spacing: 0.18em; text-transform: uppercase;
-  color: rgba(255,255,255,0.9);
-  text-align: center; line-height: 1.2;
-}
-
-/* ── Content section ── */
-.alert-content {
-  flex: 1; min-width: 0;
-  padding: 14px 24px;
-  display: flex; flex-direction: column; justify-content: center;
-  gap: 5px;
-  border-left: 1px solid rgba(255,255,255,0.06);
-}
-
-.alert-headline {
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(1.2rem, 3vw, 1.7rem);
-  font-weight: 700; color: #fff;
-  letter-spacing: 0.02em; line-height: 1.1;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-
-/* Highlight the name within the headline */
-.alert-headline .alert-name {
-  color: var(--color, #FF7919);
-}
-
-.alert-sub {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-size: 0.85rem; color: #777;
-  letter-spacing: 0.06em; text-transform: uppercase;
-}
-
-/* ── Shine sweep on entry ── */
-.alert-shine {
-  position: absolute; top: 0; bottom: 0;
-  width: 80px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);
-  transform: skewX(-15deg);
-  pointer-events: none;
+  font-size: clamp(1.1rem, 2.2vw, 1.55rem);
+  font-weight: 700;
+  color: var(--color, #CC0000);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
   opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
-.alert-card.slide-in .alert-shine {
-  animation: shineSweep 0.7s ease 0.15s forwards;
-}
-@keyframes shineSweep {
-  from { left: -80px; opacity: 1; }
-  to   { left: 110%;  opacity: 1; }
+.alert-card.animate-in .bottom-name {
+  opacity: 1; transform: translateY(0);
+  transition-delay: 0.28s;
 }
 
-/* ── Progress bar (top edge, drains left → right is already done, let's drain right to left) ── */
-.alert-progress {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
+/* Separator dot */
+.bottom-sep {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.2rem; color: rgba(255,255,255,0.2);
+  margin: 0 12px;
+  opacity: 0;
+  transition: opacity 0.2s ease 0.32s;
+}
+.alert-card.animate-in .bottom-sep { opacity: 1; }
+
+/* Action text: white */
+.bottom-action {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(0.95rem, 1.8vw, 1.3rem);
+  font-weight: 600;
+  color: #ddd;
+  letter-spacing: 0.02em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  flex: 1;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.2s ease 0.32s, transform 0.2s ease 0.32s;
+}
+.alert-card.animate-in .bottom-action { opacity: 1; transform: translateY(0); }
+
+/* Sub detail: right side */
+.bottom-sub {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: #383845;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: 16px;
+  opacity: 0;
+  transition: opacity 0.2s ease 0.4s;
+}
+.alert-card.animate-in .bottom-sub { opacity: 1; }
+
+/* Drain bar: very bottom edge of card */
+.alert-drain {
   height: 3px;
-  background: var(--color, #FF7919);
+  background: var(--color, #CC0000);
+  opacity: 0.5;
   transform-origin: left;
-  opacity: 0.6;
+  transform: scaleX(0);
 }
-.alert-card.slide-in .alert-progress {
-  animation: alertDrain var(--hold-ms, 4000ms) linear 0.2s forwards;
+.alert-card.animate-in .alert-drain {
+  transform: scaleX(1);
+  animation: drainOut var(--hold-ms, 4500ms) linear 0.35s forwards;
 }
-@keyframes alertDrain {
+@keyframes drainOut {
   from { transform: scaleX(1); }
   to   { transform: scaleX(0); }
 }

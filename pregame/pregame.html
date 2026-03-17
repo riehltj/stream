@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pre-Game</title>
+  <link rel="stylesheet" href="../shared/shared.css" />
+  <link rel="stylesheet" href="pregame.css" />
+</head>
+<body>
+
+  <!-- Background -->
+  <div class="bg"></div>
+  <div class="grid-lines"></div>
+  <div class="scanlines"></div>
+
+  <!-- Stadium vignette (heavier than normal) -->
+  <div class="stadium-vignette"></div>
+
+  <!-- Cinematic bars -->
+  <div class="cine-bar cine-bar--top" id="cineTop"></div>
+  <div class="cine-bar cine-bar--bot" id="cineBot"></div>
+
+  <!-- Flash + effects -->
+  <div class="flash-overlay" id="flash"></div>
+  <div class="shockwave" id="shockwave"></div>
+  <div class="burst-container" id="burst"></div>
+
+  <!-- Corner accents -->
+  <div class="corner corner--tl" id="cornerTL"></div>
+  <div class="corner corner--tr" id="cornerTR"></div>
+  <div class="corner corner--bl" id="cornerBL"></div>
+  <div class="corner corner--br" id="cornerBR"></div>
+
+  <!-- Network bug (top-right, appears early and stays) -->
+  <div class="network-bug" id="networkBug">
+    <div class="network-bug-dot"></div>
+    <span class="network-bug-name">StreamCenter</span>
+    <span class="network-bug-live">LIVE</span>
+  </div>
+
+  <!-- ── ACT 1: Opening / Game Title ── -->
+  <div class="act" id="actOpening">
+    <div class="act-eyebrow" id="openingEyebrow">TONIGHT</div>
+    <div class="act-game-title" id="openingGame">ARC RAIDERS</div>
+    <div class="act-session-bar" id="openingSession">
+      <span class="act-session-item" id="openingSeason">SEASON 1</span>
+      <span class="act-session-sep">·</span>
+      <span class="act-session-item" id="openingSessionNum">SESSION 1</span>
+      <span class="act-session-sep">·</span>
+      <span class="act-session-item">EXTRACTION SHOOTER</span>
+    </div>
+  </div>
+
+  <!-- ── ACT 2: Player Spotlight ── -->
+  <div class="act act--hidden" id="actPlayer">
+    <div class="spotlight-label" id="spotlightLabel">TONIGHT'S COMPETITOR</div>
+    <div class="spotlight-name" id="spotlightName">HIGHLIGHT</div>
+    <div class="spotlight-handle" id="spotlightHandle">@HighlightRiehl</div>
+    <div class="spotlight-stats" id="spotlightStats">
+      <div class="spotlight-stat">
+        <div class="ss-val" id="ssSession">S1</div>
+        <div class="ss-label">SEASON</div>
+      </div>
+      <div class="spotlight-stat-divider"></div>
+      <div class="spotlight-stat">
+        <div class="ss-val" id="ssRecord">???-???</div>
+        <div class="ss-label">RECORD</div>
+      </div>
+      <div class="spotlight-stat-divider"></div>
+      <div class="spotlight-stat">
+        <div class="ss-val threat-val">EXTREME</div>
+        <div class="ss-label">THREAT LEVEL</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ACT 3: Matchup / VS ── -->
+  <div class="act act--hidden" id="actMatchup">
+    <div class="matchup-vs" id="matchupVs">VS</div>
+    <div class="matchup-opponent" id="matchupOpponent">THE ENTIRE LOBBY</div>
+    <div class="matchup-meta" id="matchupMeta">
+      <span>Win Probability: 97%</span>
+      <span class="matchup-sep">·</span>
+      <span>Lobby Status: TERRIFIED</span>
+    </div>
+  </div>
+
+  <!-- ── ACT 4: Game Time ── -->
+  <div class="act act--hidden" id="actGameTime">
+    <div class="gt-eyebrow" id="gtEyebrow">LIVE · RIGHT NOW</div>
+    <div class="gt-title" id="gtTitle">IT'S GAME TIME</div>
+    <div class="gt-divider" id="gtDivider"></div>
+    <div class="gt-sub" id="gtSub">Loading up · Lobby won't know what hit it</div>
+  </div>
+
+  <!-- Broadcast info bar (bottom, appears at end) -->
+  <div class="broadcast-bar" id="broadcastBar">
+    <span class="broadcast-item" id="broadcastGame">ARC RAIDERS</span>
+    <span class="broadcast-sep">·</span>
+    <span class="broadcast-item" id="broadcastSession">SESSION 1</span>
+    <span class="broadcast-sep">·</span>
+    <span class="broadcast-item">StreamCenter Sports Network</span>
+  </div>
+
+  <script src="../shared/shared.js"></script>
+  <script src="../shared/config.js"></script>
+  <script src="pregame.js"></script>
+</body>
+</html>
