@@ -1,0 +1,323 @@
+/* ─── Screen system ─── */
+.stage-screen {
+  position: fixed;
+  top: var(--topbar-h);
+  bottom: var(--ticker-h);
+  left: 0; right: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Flash overlay ─── */
+.flash-overlay {
+  position: fixed; inset: 0; z-index: 100;
+  background: #fff;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+.flash-overlay.on { opacity: 0.65; }
+
+/* ════════════════════════════════════
+   INTRO SCREEN
+════════════════════════════════════ */
+.intro-eyebrow {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.4em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 20px;
+  animation: fadeSlideDown 0.8s ease forwards; opacity: 0;
+}
+.intro-heading {
+  display: flex; align-items: baseline; gap: 14px;
+  animation: fadeSlideUp 0.8s 0.2s ease forwards; opacity: 0;
+}
+.intro-top {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 700;
+  text-transform: uppercase; color: #fff; letter-spacing: 0.06em;
+}
+.intro-num {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(7rem, 22vw, 16rem); font-weight: 700;
+  line-height: 0.85;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 3px var(--red);
+  color: transparent;
+}
+.intro-subtitle {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.18em; color: #fff;
+  margin-top: -12px;
+  animation: fadeSlideUp 0.8s 0.3s ease forwards; opacity: 0;
+}
+.intro-divider {
+  width: 0; height: 3px; margin: 28px auto;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  animation: introExpand 0.8s 0.6s ease forwards;
+}
+@keyframes introExpand { to { width: 380px; } }
+.intro-meta {
+  font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase; color: #555;
+  animation: fadeSlideUp 0.8s 0.8s ease forwards; opacity: 0;
+}
+
+/* ════════════════════════════════════
+   PLAY VIEW
+════════════════════════════════════ */
+.rank-watermark {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -45%);
+  font-family: 'Oswald', sans-serif;
+  font-size: 60vw; font-weight: 700; line-height: 1;
+  color: rgba(255,255,255,0.025);
+  pointer-events: none; user-select: none; z-index: 0;
+  transition: color 0.6s;
+}
+.champion .rank-watermark { color: rgba(245,166,35,0.045); }
+
+.play-layout {
+  position: relative; z-index: 2;
+  display: flex; align-items: stretch;
+  gap: 16px;
+  padding: 20px 28px;
+  width: 100%; flex: 1; min-height: 0;
+}
+
+/* ─── Play Card ─── */
+.play-card {
+  flex: 1; min-width: 0;
+  position: relative;
+  display: flex; flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: 4px; overflow: hidden;
+  background: #0a0a0f;
+}
+
+.play-media {
+  flex: 1; min-height: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #111;
+  transition: opacity 0.35s ease;
+}
+.play-media.fading { opacity: 0; }
+
+.play-vignette {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to top,  rgba(10,10,15,0.97) 0%, transparent 45%),
+    linear-gradient(to right, rgba(10,10,15,0.45) 0%, transparent 25%);
+}
+
+/* Rank badge */
+.play-badge {
+  position: absolute; top: 18px; left: 18px;
+  display: flex; align-items: flex-start; line-height: 1;
+  filter: drop-shadow(0 2px 16px rgba(0,0,0,0.9));
+  transition: color 0.4s;
+}
+.play-badge-hash {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem; font-weight: 700;
+  color: var(--red); margin-top: 8px;
+}
+.play-badge-num {
+  font-family: 'Oswald', sans-serif;
+  font-size: 7rem; font-weight: 700; letter-spacing: -0.02em; color: #fff;
+}
+.champion .play-badge-hash { color: var(--gold); }
+.champion .play-badge-num  { color: #fff; }
+
+/* Play info (lower-left overlay) */
+.play-info {
+  position: absolute; bottom: 12px; left: 20px; right: 20px;
+}
+.play-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.6rem; font-weight: 700;
+  letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 5px;
+  transition: color 0.4s;
+}
+.champion .play-label { color: var(--gold); }
+.play-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(1.5rem, 3.2vw, 2.6rem); font-weight: 700;
+  color: #fff; line-height: 1.1;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.95);
+  margin-bottom: 6px;
+}
+.play-stat {
+  font-size: 0.82rem; letter-spacing: 0.1em;
+  color: #999; text-transform: uppercase;
+}
+
+/* Progress bar */
+.play-progress {
+  flex-shrink: 0; height: 4px;
+  background: rgba(255,255,255,0.07);
+}
+.play-progress-fill {
+  height: 100%; width: 0%;
+  background: var(--red); transition: background 0.4s;
+}
+.champion .play-progress-fill { background: var(--gold); }
+
+/* ─── Queue Panel ─── */
+.queue-panel {
+  width: 250px; flex-shrink: 0;
+  display: flex; flex-direction: column;
+  padding-top: 2px;
+}
+.queue-header {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.6rem; font-weight: 700;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 14px;
+}
+.queue-header-line {
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--red), transparent);
+}
+.queue-header-line:last-child {
+  background: linear-gradient(90deg, transparent, var(--red));
+}
+
+.queue-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border); border-radius: 3px;
+  margin-bottom: 7px;
+  background: var(--panel);
+  transition: background 0.3s, border-color 0.3s, opacity 0.4s;
+  position: relative; overflow: hidden;
+}
+.queue-item.active {
+  background: rgba(255,121,25,0.1);
+  border-color: rgba(255,121,25,0.4);
+}
+.queue-item.active::after {
+  content: '▶';
+  position: absolute; right: 10px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.55rem; color: var(--red);
+}
+.queue-item.done { opacity: 0.25; }
+
+.queue-rank {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.6rem; font-weight: 700;
+  color: rgba(255,255,255,0.15);
+  flex-shrink: 0; width: 26px; text-align: center; line-height: 1;
+}
+.queue-item.active .queue-rank { color: var(--red); }
+.queue-body { flex: 1; min-width: 0; }
+.queue-title-text {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.82rem; font-weight: 600; color: #bbb;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.queue-stat-text {
+  font-size: 0.6rem; color: #555;
+  letter-spacing: 0.06em; text-transform: uppercase; margin-top: 2px;
+}
+
+/* ─── Next Up Banner ─── */
+.next-up-banner {
+  position: absolute;
+  bottom: 16px; left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  transition: transform 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
+  display: flex; align-items: stretch;
+  z-index: 10; pointer-events: none;
+  white-space: nowrap;
+}
+.next-up-banner.visible {
+  transform: translateX(-50%) translateY(0);
+}
+.next-up-label {
+  background: var(--red);
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 7px 14px;
+  display: flex; align-items: center;
+}
+.next-up-title {
+  background: rgba(10,10,15,0.95);
+  border: 1px solid rgba(255,121,25,0.4); border-left: none;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.88rem; font-weight: 700; color: #fff;
+  padding: 7px 18px;
+  display: flex; align-items: center;
+  backdrop-filter: blur(6px);
+}
+
+/* ════════════════════════════════════
+   CHAMPION SCREEN
+════════════════════════════════════ */
+.champ-screen {
+  background: radial-gradient(ellipse 70% 55% at 50% 50%, rgba(245,166,35,0.07) 0%, transparent 70%);
+}
+.champ-confetti {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+}
+.confetti-piece {
+  position: absolute;
+  width: 8px; height: 8px;
+  border-radius: 1px;
+  animation: confettiFall var(--dur) var(--delay) ease-in forwards;
+}
+@keyframes confettiFall {
+  0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+.champ-trophy {
+  font-size: 5.5rem; margin-bottom: 14px; position: relative; z-index: 1;
+  animation: trophyIn 0.6s cubic-bezier(0.34, 1.4, 0.64, 1) forwards; opacity: 0;
+}
+@keyframes trophyIn {
+  from { transform: scale(0) rotate(-15deg); opacity: 0; }
+  to   { transform: scale(1) rotate(0); opacity: 1; }
+}
+.champ-eyebrow {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 10px;
+  position: relative; z-index: 1;
+  animation: fadeSlideDown 0.6s 0.25s ease forwards; opacity: 0;
+}
+.champ-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(2.2rem, 6vw, 4.5rem); font-weight: 700;
+  color: #fff; line-height: 1.1; text-align: center;
+  position: relative; z-index: 1;
+  animation: fadeSlideUp 0.6s 0.35s ease forwards; opacity: 0;
+}
+.champ-stat {
+  font-size: 0.9rem; color: #888;
+  letter-spacing: 0.14em; text-transform: uppercase; margin-top: 10px;
+  position: relative; z-index: 1;
+  animation: fadeSlideUp 0.6s 0.45s ease forwards; opacity: 0;
+}
+.champ-divider {
+  width: 0; height: 3px; margin: 24px auto;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  animation: introExpand 0.6s 0.55s ease forwards;
+  position: relative; z-index: 1;
+}
+.champ-replay {
+  font-size: 0.7rem; color: #555;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  position: relative; z-index: 1;
+  animation: fadeSlideUp 0.6s 0.65s ease forwards; opacity: 0;
+}

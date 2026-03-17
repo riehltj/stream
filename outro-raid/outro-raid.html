@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Outro / Raid</title>
+  <link rel="stylesheet" href="../shared/shared.css" />
+  <link rel="stylesheet" href="outro-raid.css" />
+</head>
+<body>
+
+  <!-- Background -->
+  <div class="bg"></div>
+  <div class="grid-lines"></div>
+  <div class="particles" id="particles"></div>
+  <div class="scanlines"></div>
+  <div class="vignette"></div>
+
+  <!-- Flash overlay -->
+  <div class="flash-overlay" id="flash"></div>
+
+  <!-- Corner accents -->
+  <div class="corner corner--tl" id="cornerTL"></div>
+  <div class="corner corner--tr" id="cornerTR"></div>
+  <div class="corner corner--bl" id="cornerBL"></div>
+  <div class="corner corner--br" id="cornerBR"></div>
+
+  <!-- Particle burst -->
+  <div class="burst-container" id="burst"></div>
+
+  <!-- ── OUTRO MODE ── -->
+  <div class="stage" id="outroStage">
+    <div class="eyebrow" id="outroEyebrow">STREAM OVER</div>
+
+    <div class="title-wrap">
+      <div class="title" id="outroTitle">GG</div>
+    </div>
+
+    <div class="stage-divider" id="outroDivider"></div>
+
+    <div class="tagline" id="outroTagline">Thanks for hanging — catch the next one</div>
+
+    <div class="socials-row" id="socialsRow">
+      <div class="social-chip">
+        <span class="social-icon">📺</span>
+        <div class="social-info">
+          <div class="social-platform">TWITCH</div>
+          <div class="social-handle" id="twitchHandle"></div>
+        </div>
+      </div>
+      <div class="social-chip">
+        <span class="social-icon">🐦</span>
+        <div class="social-info">
+          <div class="social-platform">TWITTER</div>
+          <div class="social-handle" id="twitterHandle"></div>
+        </div>
+      </div>
+      <div class="social-chip">
+        <span class="social-icon">▶</span>
+        <div class="social-info">
+          <div class="social-platform">YOUTUBE</div>
+          <div class="social-handle" id="youtubeHandle"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="follow-cta" id="followCta">Follow · Clip it · See you next time</div>
+  </div>
+
+  <!-- ── RAID MODE ── -->
+  <div class="stage hidden" id="raidStage">
+    <div class="eyebrow" id="raidEyebrow">RIGHT NOW</div>
+
+    <div class="title-wrap">
+      <div class="title raid-line1">WE'RE RAIDING</div>
+      <div class="title raid-line2" id="raidTarget"></div>
+    </div>
+
+    <div class="stage-divider" id="raidDivider"></div>
+
+    <div class="tagline">Head over and show some love</div>
+
+    <div class="raid-cta">
+      <div class="raid-cta-inner">
+        <span class="raid-arrow">→</span>
+        <span class="raid-cta-text" id="raidCtaText"></span>
+      </div>
+    </div>
+  </div>
+
+  <script src="../shared/shared.js"></script>
+  <script src="../shared/config.js"></script>
+  <script src="outro-raid.js"></script>
+</body>
+</html>

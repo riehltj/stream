@@ -1,0 +1,290 @@
+:root {
+  --panel-w: 310px;
+  --pbar-h:  80px;
+}
+
+/* ─── Heavier vignette for film room feel ─── */
+.film-vignette {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(ellipse 75% 70% at 60% 50%, transparent 30%, rgba(0,0,0,0.55) 100%);
+}
+
+/* ─── Left Film Panel ─── */
+.film-panel {
+  position: fixed;
+  top: var(--topbar-h);
+  bottom: calc(var(--ticker-h) + var(--pbar-h));
+  left: 0;
+  width: var(--panel-w);
+  z-index: 10;
+  display: flex; flex-direction: column;
+  background: rgba(8,8,12,0.92);
+  border-right: 2px solid var(--red);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  animation: panelIn 0.5s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+@keyframes panelIn {
+  from { transform: translateX(-100%); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+
+/* Film strip perforations */
+.film-strip {
+  display: flex; flex-direction: row;
+  gap: 6px; padding: 6px 12px;
+  background: #000;
+  border-bottom: 1px solid #1a1a1a;
+  flex-shrink: 0;
+}
+.film-hole {
+  width: 14px; height: 10px; flex-shrink: 0;
+  border: 1px solid #2a2a2a;
+  border-radius: 2px;
+  background: #0a0a0a;
+}
+
+/* Panel sections */
+.fp-section {
+  padding: 12px 16px;
+}
+.fp-section--grow { flex: 1; min-height: 0; overflow-y: auto; }
+.fp-divider { height: 1px; background: var(--border); margin: 0; flex-shrink: 0; }
+.fp-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.55rem; font-weight: 700;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: #555; margin-bottom: 10px;
+}
+
+/* Film Breakdown badge */
+.fb-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,121,25,0.1);
+  border: 1px solid rgba(255,121,25,0.3);
+  border-radius: 2px; padding: 5px 12px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 8px;
+}
+.fb-badge-icon { font-size: 0.9rem; }
+
+.analyzing-row {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 0.6rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: #555;
+}
+.analyzing-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--red);
+  animation: blink 1.2s ease-in-out infinite;
+}
+
+/* Play info */
+.play-info { padding-bottom: 14px; }
+.play-category {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.58rem; font-weight: 700;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 5px;
+}
+.play-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.15rem; font-weight: 700;
+  color: #fff; line-height: 1.2; margin-bottom: 8px;
+}
+.play-meta {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.play-timestamp {
+  font-size: 0.7rem; color: #555;
+  letter-spacing: 0.1em; font-variant-numeric: tabular-nums;
+}
+.play-nav {
+  display: flex; align-items: center; gap: 6px;
+}
+.nav-btn {
+  background: var(--panel); border: 1px solid var(--border);
+  color: #888; cursor: pointer; border-radius: 2px;
+  width: 22px; height: 22px;
+  font-size: 1rem; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-btn:hover { background: var(--panel-mid); color: #fff; }
+.nav-btn:disabled { opacity: 0.25; cursor: default; }
+.play-counter {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.65rem; font-weight: 700;
+  color: #555; letter-spacing: 0.1em;
+}
+
+/* ─── Analysis Points List ─── */
+.points-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+
+.point-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 8px 10px; border-radius: 3px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s, opacity 0.25s;
+  position: relative;
+}
+.point-item:hover { background: var(--panel); }
+
+/* States */
+.point-item.pending  { opacity: 0.45; }
+.point-item.done     { opacity: 0.35; }
+.point-item.active   {
+  background: rgba(255,121,25,0.1);
+  border-color: rgba(255,121,25,0.35);
+  opacity: 1;
+}
+.point-item.active::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  background: var(--red); border-radius: 3px 0 0 3px;
+}
+
+.point-num {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem; font-weight: 700; line-height: 1;
+  color: rgba(255,255,255,0.15);
+  flex-shrink: 0; width: 18px; text-align: center; padding-top: 1px;
+  transition: color 0.25s;
+}
+.point-item.active .point-num { color: var(--red); }
+.point-item.done   .point-num { color: rgba(255,255,255,0.3); }
+
+.point-text {
+  font-size: 0.76rem; color: #aaa; line-height: 1.4;
+  transition: color 0.25s;
+}
+.point-item.active .point-text { color: #fff; }
+.point-item.done   .point-text { color: #666; }
+
+.point-done-icon {
+  margin-left: auto; flex-shrink: 0;
+  font-size: 0.6rem; color: rgba(255,255,255,0.2);
+  display: none;
+}
+.point-item.done .point-done-icon { display: block; }
+
+/* Pulse animation when a point goes active */
+.point-item.just-activated {
+  animation: pointActivate 0.4s ease;
+}
+@keyframes pointActivate {
+  0%   { transform: translateX(-4px); }
+  60%  { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}
+
+/* ─── Key Hints ─── */
+.key-hints {
+  flex-shrink: 0;
+  display: flex; flex-direction: column; gap: 5px;
+  transition: opacity 0.3s;
+}
+.key-hints.hidden { opacity: 0; pointer-events: none; }
+.key-row {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 0.62rem; color: #555; letter-spacing: 0.04em;
+}
+.key-row.muted { opacity: 0.6; }
+.kc {
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 2px;
+  padding: 1px 5px; font-size: 0.58rem; color: #666;
+  background: rgba(255,255,255,0.03); white-space: nowrap;
+}
+
+/* ─── Main Area ─── */
+.main-area {
+  position: fixed;
+  top: var(--topbar-h);
+  bottom: calc(var(--ticker-h) + var(--pbar-h));
+  left: var(--panel-w);
+  right: 0;
+  z-index: 5;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Analysis mode watermark */
+.analysis-watermark {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: rgba(255,255,255,0.07);
+  user-select: none; pointer-events: none;
+}
+.watermark-icon { font-size: 1.2rem; }
+
+/* ─── Point Bar ─── */
+.point-bar {
+  position: fixed;
+  bottom: var(--ticker-h); left: 0; right: 0;
+  height: var(--pbar-h);
+  z-index: 15;
+  display: flex; align-items: stretch;
+  background: rgba(10,10,15,0.96);
+  border-top: 2px solid var(--red);
+  backdrop-filter: blur(8px);
+  transform: translateY(100%);
+  transition: transform 0.45s cubic-bezier(0.34, 1.1, 0.64, 1);
+}
+.point-bar.visible { transform: translateY(0); }
+
+/* Chip */
+.point-bar-chip {
+  flex-shrink: 0;
+  background: var(--red);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 0 18px; gap: 2px;
+  min-width: 80px;
+  transition: background 0.3s;
+}
+.chip-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.55rem; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+}
+.chip-num {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem; font-weight: 700; color: #fff; line-height: 1;
+}
+
+/* Text viewport */
+.point-bar-viewport {
+  flex: 1; overflow: hidden;
+  display: flex; align-items: center;
+  padding: 0 24px;
+}
+.point-bar-text {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.7rem);
+  font-weight: 600; color: #fff; letter-spacing: 0.02em;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s;
+}
+.point-bar-text.swap-out { transform: translateX(-40px); opacity: 0; }
+.point-bar-text.swap-in  { transform: translateX(40px);  opacity: 0; }
+
+/* Dots */
+.point-bar-counter {
+  flex-shrink: 0;
+  display: flex; align-items: center;
+  padding: 0 20px;
+  border-left: 1px solid var(--border);
+}
+.pb-dots { display: flex; gap: 6px; }
+.pb-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  transition: background 0.25s, transform 0.25s;
+}
+.pb-dot.active { background: var(--red); transform: scale(1.3); }
+.pb-dot.done   { background: rgba(255,255,255,0.35); }

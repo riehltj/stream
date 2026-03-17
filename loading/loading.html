@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loading</title>
+  <link rel="stylesheet" href="../shared/shared.css" />
+  <link rel="stylesheet" href="loading.css" />
+</head>
+<body>
+
+  <!-- Background layers -->
+  <div class="bg"></div>
+  <div class="grid-lines"></div>
+  <div class="sweep"></div>
+  <div class="particles" id="particles"></div>
+  <div class="scanlines"></div>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="logo"><span>■</span> StreamCenter</div>
+    <div class="live-badge">
+      <div class="live-dot active"></div>
+      <span>Loading</span>
+    </div>
+    <div class="topbar-time" id="clock"></div>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="layout">
+
+    <!-- ── Left Panel: ESPN Headlines ── -->
+    <div class="left-panel">
+
+      <div class="featured-card" id="featuredCard">
+        <div class="featured-img" id="featuredImg">
+          <div class="featured-cat-badge" id="featuredCategory">NBA</div>
+        </div>
+        <div class="featured-content">
+          <div class="featured-title" id="featuredTitle">Headline loads here</div>
+          <div class="featured-desc" id="featuredDesc">Short description of the story.</div>
+        </div>
+      </div>
+
+      <div class="headlines-label">
+        <span class="headlines-label-bar"></span>
+        TOP STORIES
+        <span class="headlines-label-bar"></span>
+      </div>
+
+      <div class="headlines-viewport">
+        <div class="headlines-inner" id="headlinesInner"></div>
+      </div>
+
+    </div>
+
+    <!-- ── Right: Quad Box ── -->
+    <div class="main-area">
+      <div class="quad-box">
+
+        <!-- Gameplay slot (top-left) -->
+        <div class="quad-panel gameplay" id="quadGameplay">
+          <div class="quad-corner quad-corner--tl"></div>
+          <div class="quad-corner quad-corner--tr"></div>
+          <div class="quad-corner quad-corner--bl"></div>
+          <div class="quad-corner quad-corner--br"></div>
+          <div class="gameplay-inner">
+            <div class="gameplay-icon">▶</div>
+            <div class="gameplay-text">GAMEPLAY</div>
+            <div class="gameplay-sub">Live Feed</div>
+          </div>
+          <div class="quad-label-chip">CAM 1</div>
+        </div>
+
+        <!-- Funny panel 1 (top-right) -->
+        <div class="quad-panel funny" id="quadFunny1">
+          <div class="funny-layer funny-layer--a" id="funnyA1"></div>
+          <div class="funny-layer funny-layer--b" id="funnyB1"></div>
+          <div class="funny-title-bar" id="funnyTitle1"></div>
+          <div class="quad-label-chip">HIGHLIGHTS</div>
+        </div>
+
+        <!-- Funny panel 2 (bottom-left) -->
+        <div class="quad-panel funny" id="quadFunny2">
+          <div class="funny-layer funny-layer--a" id="funnyA2"></div>
+          <div class="funny-layer funny-layer--b" id="funnyB2"></div>
+          <div class="funny-title-bar" id="funnyTitle2"></div>
+          <div class="quad-label-chip">MOMENTS</div>
+        </div>
+
+        <!-- Funny panel 3 (bottom-right) -->
+        <div class="quad-panel funny" id="quadFunny3">
+          <div class="funny-layer funny-layer--a" id="funnyA3"></div>
+          <div class="funny-layer funny-layer--b" id="funnyB3"></div>
+          <div class="funny-title-bar" id="funnyTitle3"></div>
+          <div class="quad-label-chip">VIBES</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Lower Third Popup (ESPN L-bar style) -->
+  <div class="lower-third" id="lowerThird">
+    <div class="lt-category" id="ltCategory">NBA</div>
+    <div class="lt-body">
+      <div class="lt-headline" id="ltHeadline">Headline text here</div>
+      <div class="lt-sub" id="ltSub">Supporting detail</div>
+    </div>
+  </div>
+
+  <!-- Ticker -->
+  <div class="ticker-wrap">
+    <div class="ticker-tag">Breaking</div>
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+
+  <script src="../shared/shared.js"></script>
+  <script src="../shared/config.js"></script>
+  <script src="loading.js"></script>
+</body>
+</html>

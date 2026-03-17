@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Breaking News</title>
+  <link rel="stylesheet" href="../shared/shared.css" />
+  <link rel="stylesheet" href="breaking-news.css" />
+</head>
+<body>
+
+  <!-- Background -->
+  <div class="bg"></div>
+  <div class="grid-lines"></div>
+  <div class="particles" id="particles"></div>
+  <div class="scanlines"></div>
+
+  <!-- Alert flash overlay -->
+  <div class="alert-flash" id="alertFlash"></div>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="logo"><span>■</span> StreamCenter</div>
+    <div class="live-badge">
+      <div class="live-dot active"></div>
+      <span id="storyCounter">Story 1 of 5</span>
+    </div>
+    <div class="topbar-time" id="clock"></div>
+  </div>
+
+  <!-- Breaking News Bar -->
+  <div class="breaking-bar" id="breakingBar">
+    <div class="breaking-bar-left">
+      <div class="breaking-flash-icon">⚡</div>
+      <div class="breaking-title">BREAKING NEWS</div>
+      <div class="breaking-flash-icon">⚡</div>
+    </div>
+    <div class="breaking-live">
+      <div class="live-dot active"></div>
+      <span>LIVE</span>
+    </div>
+    <div class="breaking-bar-right">
+      <span class="breaking-developing" id="breakingBadge">DEVELOPING STORY</span>
+    </div>
+  </div>
+
+  <!-- Main content area -->
+  <div class="content-area">
+
+    <!-- Left accent bar -->
+    <div class="accent-bar" id="accentBar"></div>
+
+    <!-- Story container (slides in/out) -->
+    <div class="story-viewport">
+      <div class="story-card" id="storyCard">
+
+        <div class="story-category" id="storyCategory">GAMING CRISIS 🎮</div>
+
+        <div class="story-headline" id="storyHeadline">
+          Local Gamer Refuses to Pause Mid-Game
+        </div>
+
+        <div class="story-sub" id="storySub">
+          Sources confirm the situation is "totally fine" and "almost done"
+        </div>
+
+        <div class="story-source-bar">
+          <div class="source-chip">
+            <span class="source-chip-label">SOURCE</span>
+            <span class="source-chip-text" id="storySource">Anonymous Roommate</span>
+          </div>
+          <div class="source-sep">·</div>
+          <div class="source-chip">
+            <span class="source-chip-label">REPORTING</span>
+            <span class="source-chip-text" id="storyReporter">Chad McStream, Gaming Correspondent</span>
+          </div>
+          <div class="source-sep">·</div>
+          <div class="source-chip">
+            <span class="source-chip-label">FILED</span>
+            <span class="source-chip-text" id="storyTime">Just Now</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Story dots -->
+    <div class="story-dots" id="storyDots"></div>
+
+  </div>
+
+  <!-- Progress bar -->
+  <div class="story-progress">
+    <div class="story-progress-fill" id="progressFill"></div>
+  </div>
+
+  <!-- Ticker -->
+  <div class="ticker-wrap">
+    <div class="ticker-tag">Breaking</div>
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+
+  <script src="../shared/shared.js"></script>
+  <script src="../shared/config.js"></script>
+  <script src="breaking-news.js"></script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stat Tracker</title>
+  <link rel="stylesheet" href="../shared/shared.css" />
+  <link rel="stylesheet" href="stat-tracker.css" />
+</head>
+<body>
+
+  <!-- Background -->
+  <div class="bg"></div>
+  <div class="grid-lines"></div>
+  <div class="particles" id="particles"></div>
+  <div class="scanlines"></div>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="logo"><span>■</span> StreamCenter</div>
+    <div class="live-badge">
+      <div class="live-dot active"></div>
+      <span id="sessionTimer">Session: 0:00</span>
+    </div>
+    <div class="topbar-time" id="clock"></div>
+  </div>
+
+  <!-- Session header bar -->
+  <div class="session-bar">
+    <div class="session-bar-left">
+      <span class="session-game">ARC RAIDERS</span>
+      <span class="session-divider">·</span>
+      <span class="session-label">EXTRACTION SHOOTER</span>
+    </div>
+    <div class="session-bar-center" id="sessionRating">
+      <span class="rating-label">ANALYST RATING</span>
+      <span class="rating-value" id="ratingValue">S+</span>
+    </div>
+    <div class="session-bar-right" id="sessionDate"></div>
+  </div>
+
+  <!-- Main stats area -->
+  <div class="stats-area">
+
+    <!-- Primary row: the real stats -->
+    <div class="stats-row primary-row">
+
+      <div class="stat-card primary extraction" id="cardExtractions">
+        <div class="stat-card-top-bar"></div>
+        <div class="stat-value" id="valExtractions">0</div>
+        <div class="stat-label">EXTRACTIONS</div>
+        <div class="stat-sub" id="subExtractions">0 rounds played</div>
+      </div>
+
+      <div class="stat-card primary fights" id="cardFights">
+        <div class="stat-card-top-bar"></div>
+        <div class="stat-value" id="valFights">0</div>
+        <div class="stat-label">FIGHTS WON</div>
+        <div class="stat-sub" id="subFights">0 per extraction</div>
+      </div>
+
+      <div class="stat-card primary deaths" id="cardDeaths">
+        <div class="stat-card-top-bar"></div>
+        <div class="stat-value" id="valDeaths">0</div>
+        <div class="stat-label">DEATHS</div>
+        <div class="stat-sub" id="subDeaths">tactical repositions</div>
+      </div>
+
+    </div>
+
+    <!-- Secondary row: derived / "totally real" stats -->
+    <div class="stats-row secondary-row">
+
+      <div class="stat-card secondary" id="cardSurvival">
+        <div class="stat-value secondary-value" id="valSurvival">–</div>
+        <div class="stat-label">SURVIVAL RATE</div>
+      </div>
+
+      <div class="stat-card secondary" id="cardKD">
+        <div class="stat-value secondary-value" id="valKD">–</div>
+        <div class="stat-label">K/D RATIO</div>
+      </div>
+
+      <div class="stat-card secondary threat" id="cardThreat">
+        <div class="stat-value secondary-value threat-value" id="valThreat">EXTREME</div>
+        <div class="stat-label">LOBBY THREAT LVL</div>
+      </div>
+
+      <div class="stat-card secondary" id="cardImpact">
+        <div class="stat-value secondary-value gold" id="valImpact">–</div>
+        <div class="stat-label">IMPACT SCORE</div>
+      </div>
+
+    </div>
+
+    <!-- Recent rounds -->
+    <div class="recent-row">
+      <div class="recent-label">RECENT ROUNDS</div>
+      <div class="recent-badges" id="recentBadges">
+        <div class="recent-empty">No rounds yet this session</div>
+      </div>
+    </div>
+
+    <!-- Analyst notes -->
+    <div class="analyst-bar">
+      <div class="analyst-tag">⚡ ANALYST</div>
+      <div class="analyst-text" id="analystText">Waiting for data... analysts are standing by.</div>
+    </div>
+
+  </div>
+
+  <!-- Key hints panel -->
+  <div class="key-hints" id="keyHints">
+    <div class="key-hint-row" id="hintE">
+      <span class="key-cap">E</span>
+      <span class="key-desc">Extraction</span>
+      <span class="key-val" id="hintValE">+1</span>
+    </div>
+    <div class="key-hint-row" id="hintF">
+      <span class="key-cap">F</span>
+      <span class="key-desc">Fight Won</span>
+      <span class="key-val" id="hintValF">+1</span>
+    </div>
+    <div class="key-hint-row" id="hintD">
+      <span class="key-cap">D</span>
+      <span class="key-desc">Death</span>
+      <span class="key-val" id="hintValD">+1</span>
+    </div>
+    <div class="key-hint-divider"></div>
+    <div class="key-hint-row muted">
+      <span class="key-cap small">Z</span>
+      <span class="key-desc">Undo</span>
+    </div>
+    <div class="key-hint-row muted">
+      <span class="key-cap small">R</span>
+      <span class="key-desc">Reset</span>
+    </div>
+    <div class="key-hint-row muted">
+      <span class="key-cap small">H</span>
+      <span class="key-desc">Hide hints</span>
+    </div>
+  </div>
+
+  <!-- Reset confirm overlay -->
+  <div class="reset-confirm" id="resetConfirm" style="display:none">
+    <div class="reset-confirm-box">
+      <div class="reset-confirm-title">RESET SESSION?</div>
+      <div class="reset-confirm-sub">Press R again to confirm · Any other key to cancel</div>
+    </div>
+  </div>
+
+  <!-- Ticker -->
+  <div class="ticker-wrap">
+    <div class="ticker-tag">Live Stats</div>
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+
+  <script src="../shared/shared.js"></script>
+  <script src="../shared/config.js"></script>
+  <script src="stat-tracker.js"></script>
+</body>
+</html>

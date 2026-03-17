@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Top Plays</title>
+  <link rel="stylesheet" href="../shared/shared.css" />
+  <link rel="stylesheet" href="top-plays.css" />
+</head>
+<body>
+
+  <!-- Background -->
+  <div class="bg"></div>
+  <div class="grid-lines"></div>
+  <div class="sweep"></div>
+  <div class="particles" id="particles"></div>
+  <div class="scanlines"></div>
+
+  <!-- Flash transition overlay -->
+  <div class="flash-overlay" id="flashOverlay"></div>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="logo"><span>■</span> StreamCenter</div>
+    <div class="live-badge">
+      <div class="live-dot active"></div>
+      <span>Top Plays</span>
+    </div>
+    <div class="topbar-time" id="clock"></div>
+  </div>
+
+  <!-- ── Intro Screen ── -->
+  <div class="stage-screen" id="introScreen">
+    <div class="intro-eyebrow">Session Highlights</div>
+    <div class="intro-heading">
+      <span class="intro-top">TOP</span>
+      <span class="intro-num">5</span>
+    </div>
+    <div class="intro-subtitle">PLAYS</div>
+    <div class="intro-divider"></div>
+    <div class="intro-meta">Auto-advancing &nbsp;·&nbsp; Lobby Edition</div>
+  </div>
+
+  <!-- ── Play View ── -->
+  <div class="stage-screen" id="playView" style="display:none">
+
+    <!-- Giant rank number behind everything -->
+    <div class="rank-watermark" id="rankWatermark">5</div>
+
+    <div class="play-layout">
+
+      <!-- Main card -->
+      <div class="play-card" id="playCard">
+        <div class="play-media" id="playMedia"></div>
+        <div class="play-vignette"></div>
+
+        <div class="play-badge">
+          <span class="play-badge-hash">#</span>
+          <span class="play-badge-num" id="playBadgeNum">5</span>
+        </div>
+
+        <div class="play-info">
+          <div class="play-label" id="playLabel">Play of the Game</div>
+          <div class="play-title" id="playTitle">Play Title Here</div>
+          <div class="play-stat"  id="playStat">Stat · Context</div>
+        </div>
+
+        <div class="play-progress">
+          <div class="play-progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <!-- Queue sidebar -->
+      <div class="queue-panel">
+        <div class="queue-header">
+          <span class="queue-header-line"></span>
+          COMING UP
+          <span class="queue-header-line"></span>
+        </div>
+        <div class="queue-list" id="queueList"></div>
+      </div>
+
+    </div>
+
+    <!-- Next up banner (slides up above ticker) -->
+    <div class="next-up-banner" id="nextUpBanner">
+      <div class="next-up-label">NEXT UP</div>
+      <div class="next-up-title" id="nextUpTitle">Play title</div>
+    </div>
+
+  </div>
+
+  <!-- ── Champion / End Screen ── -->
+  <div class="stage-screen" id="champScreen" style="display:none">
+    <div class="champ-confetti" id="champConfetti"></div>
+    <div class="champ-trophy">🏆</div>
+    <div class="champ-eyebrow">Best Play of the Session</div>
+    <div class="champ-title" id="champTitle">Play Title</div>
+    <div class="champ-stat"  id="champStat">Stat</div>
+    <div class="champ-divider"></div>
+    <div class="champ-replay" id="champReplay">Replaying in 8...</div>
+  </div>
+
+  <!-- Ticker -->
+  <div class="ticker-wrap">
+    <div class="ticker-tag">Top Plays</div>
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+
+  <script src="../shared/shared.js"></script>
+  <script src="../shared/config.js"></script>
+  <script src="top-plays.js"></script>
+</body>
+</html>

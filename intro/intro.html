@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intro</title>
+  <link rel="stylesheet" href="../shared/shared.css" />
+  <link rel="stylesheet" href="intro.css" />
+</head>
+<body>
+
+  <!-- Background -->
+  <div class="bg" id="bg"></div>
+  <div class="grid-lines"></div>
+  <div class="scanlines"></div>
+  <div class="vignette"></div>
+
+  <!-- Cinematic bars (open on load, close on loop) -->
+  <div class="cine-bar cine-bar--top" id="cineTop"></div>
+  <div class="cine-bar cine-bar--bot" id="cineBot"></div>
+
+  <!-- Flash overlay -->
+  <div class="flash-overlay" id="flash"></div>
+
+  <!-- Shockwave (fires on title slam) -->
+  <div class="shockwave" id="shockwave"></div>
+
+  <!-- Corner accents -->
+  <div class="corner corner--tl" id="cornerTL"></div>
+  <div class="corner corner--tr" id="cornerTR"></div>
+  <div class="corner corner--bl" id="cornerBL"></div>
+  <div class="corner corner--br" id="cornerBR"></div>
+
+  <!-- Particle burst container -->
+  <div class="burst-container" id="burst"></div>
+
+  <!-- Main stage -->
+  <div class="stage" id="stage">
+
+    <div class="eyebrow" id="eyebrow">WELCOME TO</div>
+
+    <div class="title-wrap" id="titleWrap">
+      <!-- Ghost layer for glitch effect -->
+      <div class="title-ghost" id="titleGhost" aria-hidden="true"></div>
+      <!-- Real title -->
+      <div class="title" id="titleEl"></div>
+    </div>
+
+    <div class="intro-divider" id="introDivider"></div>
+
+    <div class="tagline" id="taglineEl"></div>
+
+    <div class="live-row" id="liveRow">
+      <div class="live-pip"></div>
+      <span>LIVE</span>
+      <span class="live-sep">·</span>
+      <span class="live-sub" id="liveSubEl"></span>
+    </div>
+
+  </div>
+
+  <!-- Season / episode badge -->
+  <div class="season-badge" id="seasonBadge"></div>
+
+  <script src="../shared/shared.js"></script>
+  <script src="../shared/config.js"></script>
+  <script src="intro.js"></script>
+</body>
+</html>

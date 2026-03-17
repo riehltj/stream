@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Film Breakdown</title>
+  <link rel="stylesheet" href="../shared/shared.css" />
+  <link rel="stylesheet" href="film-breakdown.css" />
+</head>
+<body>
+
+  <!-- Background -->
+  <div class="bg"></div>
+  <div class="grid-lines"></div>
+  <div class="particles" id="particles"></div>
+  <div class="scanlines"></div>
+
+  <!-- Film vignette (heavier than normal — film room feel) -->
+  <div class="film-vignette"></div>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="logo"><span>■</span> StreamCenter</div>
+    <div class="live-badge">
+      <div class="live-dot active"></div>
+      <span>Film Breakdown</span>
+    </div>
+    <div class="topbar-time" id="clock"></div>
+  </div>
+
+  <!-- ── Left Panel ── -->
+  <div class="film-panel">
+
+    <!-- Film strip perforations (decorative) -->
+    <div class="film-strip" id="filmStrip"></div>
+
+    <!-- Header -->
+    <div class="fp-section">
+      <div class="fb-badge">
+        <span class="fb-badge-icon">⏸</span>
+        FILM BREAKDOWN
+      </div>
+      <div class="analyzing-row">
+        <span class="analyzing-dot"></span>
+        ANALYZING
+      </div>
+    </div>
+
+    <!-- Play info -->
+    <div class="fp-divider"></div>
+    <div class="fp-section play-info">
+      <div class="play-category" id="playCategory">ROUND 1</div>
+      <div class="play-title" id="playTitle">Play Title Here</div>
+      <div class="play-meta">
+        <span class="play-timestamp" id="playTimestamp">0:00</span>
+        <span class="play-nav">
+          <button class="nav-btn" id="btnPrevPlay" title="Prev play">‹</button>
+          <span class="play-counter" id="playCounter">1 / 1</span>
+          <button class="nav-btn" id="btnNextPlay" title="Next play">›</button>
+        </span>
+      </div>
+    </div>
+
+    <!-- Analysis points -->
+    <div class="fp-divider"></div>
+    <div class="fp-section fp-section--grow">
+      <div class="fp-label">ANALYSIS POINTS</div>
+      <ul class="points-list" id="pointsList"></ul>
+    </div>
+
+    <!-- Keyboard hints -->
+    <div class="fp-divider"></div>
+    <div class="fp-section key-hints" id="keyHints">
+      <div class="key-row"><span class="kc">N</span><span class="kc">→</span> Next point</div>
+      <div class="key-row"><span class="kc">P</span><span class="kc">←</span> Prev point</div>
+      <div class="key-row"><span class="kc">1–9</span> Jump to point</div>
+      <div class="key-row muted"><span class="kc">]</span><span class="kc">[</span> Switch play &nbsp;·&nbsp; <span class="kc">R</span> Reset &nbsp;·&nbsp; <span class="kc">H</span> Hints</div>
+    </div>
+
+  </div>
+
+  <!-- ── Main Area (transparent — gameplay + webcam here) ── -->
+  <div class="main-area">
+    <div class="analysis-watermark" id="analysisWatermark">
+      <span class="watermark-icon">⏸</span>
+      <span class="watermark-text">ANALYSIS MODE</span>
+    </div>
+  </div>
+
+  <!-- ── Current Point Bar (above ticker) ── -->
+  <div class="point-bar" id="pointBar">
+    <div class="point-bar-chip" id="pointBarChip">
+      <div class="chip-label">POINT</div>
+      <div class="chip-num" id="chipNum">1</div>
+    </div>
+    <div class="point-bar-viewport">
+      <div class="point-bar-text" id="pointBarText">Analysis point text here</div>
+    </div>
+    <div class="point-bar-counter" id="pointBarCounter">
+      <div class="pb-dots" id="pbDots"></div>
+    </div>
+  </div>
+
+  <!-- Ticker -->
+  <div class="ticker-wrap">
+    <div class="ticker-tag">Film Session</div>
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+
+  <script src="../shared/shared.js"></script>
+  <script src="../shared/config.js"></script>
+  <script src="film-breakdown.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Starting Soon</title>
+  <link rel="stylesheet" href="../shared/shared.css" />
+  <link rel="stylesheet" href="starting-soon.css" />
+</head>
+<body>
+
+  <!-- Background layers -->
+  <div class="bg"></div>
+  <div class="grid-lines"></div>
+  <div class="sweep"></div>
+
+  <!-- Pulse rings -->
+  <div class="pulse-ring"></div>
+  <div class="pulse-ring"></div>
+  <div class="pulse-ring"></div>
+
+  <!-- Particles -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Corner accents -->
+  <div class="corner corner--tl"></div>
+  <div class="corner corner--tr"></div>
+  <div class="corner corner--bl"></div>
+  <div class="corner corner--br"></div>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="logo"><span>■</span> StreamCenter</div>
+    <div class="live-badge">
+      <div class="live-dot" id="liveDot"></div>
+      <span id="liveText">Starting Soon</span>
+    </div>
+    <div class="topbar-time" id="clock"></div>
+  </div>
+
+  <!-- Scanlines -->
+  <div class="scanlines"></div>
+
+  <!-- Main content -->
+  <main class="main">
+    <div class="broadcast-label">Live Broadcast</div>
+
+    <div class="heading-wrap">
+      <div class="heading-bg-text">Soon</div>
+      <div class="heading">
+        <span class="heading-line1">Starting</span>
+        <span class="heading-line2">Soon</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="subline">
+      Stream begins in &nbsp;<strong id="subCountdown">–</strong>&nbsp; — hang tight
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-value gold" id="countdown">10:00</div>
+        <div class="stat-label">Countdown</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="viewerCount">–</div>
+        <div class="stat-label">Viewers Waiting</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="sessionNum">#1</div>
+        <div class="stat-label">Today's Stream</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Ticker -->
+  <div class="ticker-wrap">
+    <div class="ticker-tag">Live</div>
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+
+  <script src="../shared/shared.js"></script>
+  <script src="../shared/config.js"></script>
+  <script src="starting-soon.js"></script>
+</body>
+</html>

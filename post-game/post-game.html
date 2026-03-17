@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Post-Game Interview</title>
+  <link rel="stylesheet" href="../shared/shared.css" />
+  <link rel="stylesheet" href="post-game.css" />
+</head>
+<body>
+
+  <!-- Background (subtle — webcam is the hero) -->
+  <div class="bg"></div>
+  <div class="grid-lines"></div>
+  <div class="particles" id="particles"></div>
+  <div class="scanlines"></div>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="logo"><span>■</span> StreamCenter</div>
+    <div class="live-badge">
+      <div class="live-dot active"></div>
+      <span>Post-Game Interview</span>
+    </div>
+    <div class="topbar-time" id="clock"></div>
+  </div>
+
+  <!-- Left panel: player card -->
+  <div class="player-panel">
+
+    <div class="panel-section">
+      <div class="postgame-badge">
+        <span class="postgame-badge-dot"></span>
+        POST GAME
+      </div>
+    </div>
+
+    <div class="panel-section player-identity">
+      <div class="player-name" id="playerName">STREAMER</div>
+      <div class="player-handle" id="playerHandle">@handle</div>
+      <div class="player-title" id="playerTitle">Arc Raiders · Extraction</div>
+    </div>
+
+    <div class="panel-divider"></div>
+
+    <div class="panel-section">
+      <div class="panel-label">SESSION RECAP</div>
+      <div class="recap-grid" id="recapGrid">
+        <!-- JS populated -->
+      </div>
+    </div>
+
+    <div class="panel-divider"></div>
+
+    <div class="panel-section">
+      <div class="panel-label">TODAY'S TOPICS</div>
+      <ul class="topics-list" id="topicsList">
+        <!-- JS populated -->
+      </ul>
+    </div>
+
+    <div class="panel-spacer"></div>
+
+    <div class="panel-section">
+      <div class="panel-label">BROADCAST BY</div>
+      <div class="broadcast-info">StreamCenter Sports Network</div>
+      <div class="key-hints-mini">
+        <span class="mini-key">N</span> Next &nbsp;·&nbsp;
+        <span class="mini-key">R</span> Random &nbsp;·&nbsp;
+        <span class="mini-key">H</span> Hide
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Question bar (fixed above ticker) -->
+  <div class="question-bar" id="questionBar">
+
+    <div class="reporter-chip" id="reporterChip">
+      <div class="reporter-icon">🎙</div>
+      <div class="reporter-info">
+        <div class="reporter-name" id="reporterName">Chad McStream</div>
+        <div class="reporter-outlet" id="reporterOutlet">Gaming Correspondent</div>
+      </div>
+    </div>
+
+    <div class="question-viewport">
+      <div class="question-text" id="questionText">
+        Talk us through what happened out there today.
+      </div>
+    </div>
+
+    <div class="question-counter" id="questionCounter">
+      <div class="q-dots" id="qDots"></div>
+      <div class="q-num" id="qNum">1 / 8</div>
+    </div>
+
+  </div>
+
+  <!-- Ticker -->
+  <div class="ticker-wrap">
+    <div class="ticker-tag">Live Interview</div>
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+
+  <script src="../shared/shared.js"></script>
+  <script src="../shared/config.js"></script>
+  <script src="post-game.js"></script>
+</body>
+</html>

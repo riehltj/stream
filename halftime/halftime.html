@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Halftime</title>
+  <link rel="stylesheet" href="../shared/shared.css" />
+  <link rel="stylesheet" href="halftime.css" />
+</head>
+<body>
+
+  <!-- Background -->
+  <div class="bg"></div>
+  <div class="grid-lines"></div>
+  <div class="sweep"></div>
+  <div class="particles" id="particles"></div>
+  <div class="scanlines"></div>
+
+  <!-- Pulse rings (broadcast feel) -->
+  <div class="pulse-ring"></div>
+  <div class="pulse-ring"></div>
+  <div class="pulse-ring"></div>
+
+  <!-- Corner accents -->
+  <div class="corner corner--tl"></div>
+  <div class="corner corner--tr"></div>
+  <div class="corner corner--bl"></div>
+  <div class="corner corner--br"></div>
+
+  <!-- Flash overlay -->
+  <div class="end-flash" id="endFlash"></div>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="logo"><span>■</span> StreamCenter</div>
+    <div class="live-badge">
+      <div class="live-dot active"></div>
+      <span id="topbarStatus">Halftime</span>
+    </div>
+    <div class="topbar-time" id="clock"></div>
+  </div>
+
+  <!-- Main stage -->
+  <main class="stage">
+
+    <!-- Hero: HALFTIME title + countdown -->
+    <div class="hero">
+      <div class="eyebrow" id="eyebrow">⚡ &nbsp; Halftime Break &nbsp; ⚡</div>
+
+      <div class="title-wrap">
+        <div class="title-bg-text">Break</div>
+        <div class="title">
+          <span class="title-line1">HALF</span><span class="title-line2">TIME</span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Countdown -->
+      <div class="countdown-wrap" id="countdownWrap">
+        <div class="countdown-label" id="countdownLabel">BACK IN</div>
+        <div class="countdown-display">
+          <span class="countdown-num" id="countMin">5</span>
+          <span class="countdown-colon" id="colon">:</span>
+          <span class="countdown-num" id="countSec">00</span>
+        </div>
+        <div class="countdown-hint" id="countdownHint">
+          <span class="hint-key">SPACE</span> Start &nbsp;·&nbsp;
+          <span class="hint-key">+</span><span class="hint-key">−</span> Time &nbsp;·&nbsp;
+          <span class="hint-key">R</span> Reset
+        </div>
+      </div>
+    </div>
+
+    <!-- Lower panels -->
+    <div class="lower-panels">
+
+      <!-- While You Wait -->
+      <div class="panel wait-panel">
+        <div class="panel-header">
+          <span class="panel-header-line"></span>
+          WHILE YOU WAIT
+          <span class="panel-header-line"></span>
+        </div>
+        <ul class="wait-list" id="waitList"></ul>
+      </div>
+
+      <!-- Halftime Report -->
+      <div class="panel report-panel">
+        <div class="panel-header">
+          <span class="panel-header-line"></span>
+          HALFTIME REPORT
+          <span class="panel-header-line"></span>
+        </div>
+        <div class="report-body">
+          <div class="report-quote" id="reportQuote">"Loading analysis..."</div>
+          <div class="report-source" id="reportSource">— StreamCenter Analytics</div>
+        </div>
+      </div>
+
+      <!-- Second Half teaser -->
+      <div class="panel teaser-panel">
+        <div class="panel-header">
+          <span class="panel-header-line"></span>
+          SECOND HALF
+          <span class="panel-header-line"></span>
+        </div>
+        <div class="teaser-items" id="teaserItems"></div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- "BACK TO IT" end screen (shown when timer hits 0) -->
+  <div class="end-screen" id="endScreen" style="display:none">
+    <div class="end-icon">🔥</div>
+    <div class="end-title">LET'S GET IT</div>
+    <div class="end-sub">Second half starts now</div>
+  </div>
+
+  <!-- Ticker -->
+  <div class="ticker-wrap">
+    <div class="ticker-tag">Halftime</div>
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+
+  <script src="../shared/shared.js"></script>
+  <script src="../shared/config.js"></script>
+  <script src="halftime.js"></script>
+</body>
+</html>

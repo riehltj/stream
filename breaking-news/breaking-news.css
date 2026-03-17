@@ -1,0 +1,220 @@
+/* ─── Alert Flash ─── */
+.alert-flash {
+  position: fixed; inset: 0; z-index: 100;
+  background: var(--red);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.1s ease;
+}
+.alert-flash.on { opacity: 0.45; }
+
+/* ─── Breaking News Bar ─── */
+.breaking-bar {
+  position: fixed;
+  top: var(--topbar-h); left: 0; right: 0;
+  height: 64px; z-index: 15;
+  background: var(--red);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px;
+  border-bottom: 3px solid rgba(0,0,0,0.3);
+  animation: barSlideDown 0.5s 0.1s cubic-bezier(0.34, 1.2, 0.64, 1) both;
+}
+@keyframes barSlideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+.breaking-bar-left {
+  display: flex; align-items: center; gap: 14px;
+}
+.breaking-flash-icon {
+  font-size: 1.4rem;
+  animation: flashIcon 1s ease-in-out infinite;
+}
+@keyframes flashIcon {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(0.85); }
+}
+.breaking-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.8rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+.breaking-live {
+  display: flex; align-items: center; gap: 7px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.9);
+  background: rgba(0,0,0,0.25);
+  padding: 5px 14px; border-radius: 2px;
+}
+.breaking-developing {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+  border: 1px solid rgba(255,255,255,0.35);
+  padding: 4px 12px; border-radius: 2px;
+  transition: color 0.3s, border-color 0.3s;
+}
+
+/* ─── Content Area ─── */
+.content-area {
+  position: fixed;
+  top: calc(var(--topbar-h) + 64px);
+  bottom: calc(var(--ticker-h) + 4px); /* 4px for progress bar */
+  left: 0; right: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  padding: 0 80px;
+  gap: 40px;
+}
+
+/* Left colored accent bar */
+.accent-bar {
+  width: 6px;
+  height: 55%;
+  background: var(--red);
+  border-radius: 3px;
+  flex-shrink: 0;
+  transition: background 0.4s;
+  animation: accentGrow 0.5s 0.4s ease both;
+}
+@keyframes accentGrow {
+  from { height: 0; opacity: 0; }
+  to   { height: 55%; opacity: 1; }
+}
+
+/* Story viewport — clips slide animations */
+.story-viewport {
+  flex: 1; min-width: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Story card */
+.story-card {
+  display: flex; flex-direction: column;
+  gap: 20px;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.3s ease;
+}
+.story-card.slide-out-left {
+  transform: translateX(-60px);
+  opacity: 0;
+}
+.story-card.slide-in-right {
+  transform: translateX(60px);
+  opacity: 0;
+}
+
+/* Category label */
+.story-category {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--red);
+  animation: fadeSlideDown 0.4s 0.2s ease both;
+}
+
+/* Main headline */
+.story-headline {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(2.2rem, 5.5vw, 4.4rem);
+  font-weight: 700; line-height: 1.1;
+  color: #fff; letter-spacing: 0.01em;
+  animation: headlineIn 0.5s 0.3s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+@keyframes headlineIn {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Sub text */
+.story-sub {
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  color: #aaa; line-height: 1.5;
+  letter-spacing: 0.02em;
+  max-width: 820px;
+  animation: fadeSlideUp 0.5s 0.45s ease both;
+}
+
+/* Source bar */
+.story-source-bar {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 10px 0;
+  animation: fadeSlideUp 0.5s 0.55s ease both;
+  margin-top: 4px;
+}
+.source-chip {
+  display: flex; align-items: center; gap: 7px;
+}
+.source-chip-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.58rem; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--red);
+  background: rgba(255,121,25,0.1);
+  padding: 2px 7px; border-radius: 2px;
+}
+.source-chip-text {
+  font-size: 0.78rem; color: #888;
+  letter-spacing: 0.04em;
+}
+.source-sep {
+  color: rgba(255,255,255,0.15);
+  margin: 0 10px;
+  font-size: 0.9rem;
+}
+
+/* Story dots */
+.story-dots {
+  position: absolute;
+  bottom: 24px; left: 80px;
+  display: flex; gap: 8px;
+  align-items: center;
+}
+.story-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  transition: background 0.3s, transform 0.3s;
+}
+.story-dot.active {
+  background: var(--red);
+  transform: scale(1.3);
+}
+.story-dot.done {
+  background: rgba(255,255,255,0.35);
+}
+
+/* ─── Progress Bar ─── */
+.story-progress {
+  position: fixed;
+  bottom: var(--ticker-h); left: 0; right: 0;
+  height: 4px; z-index: 15;
+  background: rgba(255,255,255,0.07);
+}
+.story-progress-fill {
+  height: 100%; width: 0%;
+  background: var(--red);
+  transition: background 0.4s;
+}
+
+/* ─── Severity variants ─── */
+/* Add class to <body> to change the accent color */
+body.severity-critical .breaking-bar,
+body.severity-critical .story-progress-fill { background: #e81010; }
+body.severity-critical .story-category,
+body.severity-critical .accent-bar,
+body.severity-critical .source-chip-label { color: #e81010; background-color: rgba(232,16,16,0.1); }
+body.severity-critical .accent-bar { background: #e81010; }
+
+body.severity-update .breaking-bar { background: var(--gold); }
+body.severity-update .story-progress-fill,
+body.severity-update .accent-bar { background: var(--gold); }
+body.severity-update .story-category,
+body.severity-update .source-chip-label { color: var(--gold); }
+body.severity-update .source-chip-label { background: rgba(245,166,35,0.1); }
+body.severity-update .breaking-bar .live-dot.active { background: #fff; box-shadow: 0 0 8px #fff; }

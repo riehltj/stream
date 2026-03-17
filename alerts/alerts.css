@@ -1,0 +1,171 @@
+/* ── Transparent overlay — OBS composites this over everything ── */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto+Condensed:wght@400;700&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: transparent;
+  width: 100vw; height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Flash overlay (full screen, fires on alert entry) ── */
+.alert-flash {
+  position: fixed; inset: 0;
+  background: var(--flash-color, #FF7919);
+  opacity: 0; pointer-events: none;
+  z-index: 10;
+}
+.alert-flash.on  { opacity: 0.25; transition: none; }
+.alert-flash.off { opacity: 0; transition: opacity 0.35s ease; }
+
+/* ── Container: centered at bottom ── */
+.alert-container {
+  position: fixed;
+  bottom: 90px; /* above a standard OBS ticker */
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(920px, 92vw);
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* ── Alert card ── */
+.alert-card {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  background: rgba(6, 6, 10, 0.97);
+  border-top: 3px solid var(--color, #FF7919);
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 -4px 40px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.05);
+
+  /* Start below screen, hidden */
+  transform: translateY(120%);
+  opacity: 0;
+  transition: transform 0.5s cubic-bezier(0.34, 1.08, 0.64, 1), opacity 0.25s ease;
+}
+.alert-card.slide-in {
+  transform: translateY(0);
+  opacity: 1;
+}
+.alert-card.slide-out {
+  transform: translateY(130%);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 1, 1), opacity 0.3s ease;
+}
+
+/* ── Left badge section ── */
+.alert-badge {
+  flex-shrink: 0;
+  width: 140px;
+  background: var(--color, #FF7919);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 4px;
+  padding: 16px 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Scanline texture on badge */
+.alert-badge::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,0,0,0.12) 3px,
+    rgba(0,0,0,0.12) 4px
+  );
+  pointer-events: none;
+}
+
+.alert-badge-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 0 6px rgba(255,255,255,0.7);
+  animation: badgeBlink 0.9s ease-in-out infinite;
+  margin-bottom: 2px;
+}
+@keyframes badgeBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+.alert-badge-icon {
+  font-size: 1.8rem; line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.alert-badge-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.58rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.9);
+  text-align: center; line-height: 1.2;
+}
+
+/* ── Content section ── */
+.alert-content {
+  flex: 1; min-width: 0;
+  padding: 14px 24px;
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 5px;
+  border-left: 1px solid rgba(255,255,255,0.06);
+}
+
+.alert-headline {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(1.2rem, 3vw, 1.7rem);
+  font-weight: 700; color: #fff;
+  letter-spacing: 0.02em; line-height: 1.1;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Highlight the name within the headline */
+.alert-headline .alert-name {
+  color: var(--color, #FF7919);
+}
+
+.alert-sub {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 0.85rem; color: #777;
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+
+/* ── Shine sweep on entry ── */
+.alert-shine {
+  position: absolute; top: 0; bottom: 0;
+  width: 80px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);
+  transform: skewX(-15deg);
+  pointer-events: none;
+  opacity: 0;
+}
+.alert-card.slide-in .alert-shine {
+  animation: shineSweep 0.7s ease 0.15s forwards;
+}
+@keyframes shineSweep {
+  from { left: -80px; opacity: 1; }
+  to   { left: 110%;  opacity: 1; }
+}
+
+/* ── Progress bar (top edge, drains left → right is already done, let's drain right to left) ── */
+.alert-progress {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--color, #FF7919);
+  transform-origin: left;
+  opacity: 0.6;
+}
+.alert-card.slide-in .alert-progress {
+  animation: alertDrain var(--hold-ms, 4000ms) linear 0.2s forwards;
+}
+@keyframes alertDrain {
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(0); }
+}

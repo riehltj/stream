@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto+Condensed:wght@400;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --red:        #FF7919;
+  --red-bright: #FF9940;
+  --red-dim:    rgba(255,121,25,0.15);
+  --gold:       #f5a623;
+  --dark:       #0a0a0f;
+  --navy:       #0d1b2a;
+  --panel:      rgba(255,255,255,0.04);
+  --panel-mid:  rgba(255,255,255,0.07);
+  --border:     rgba(255,255,255,0.08);
+  --topbar-h:   50px;
+  --ticker-h:   40px;
+}
+
+body {
+  background: var(--dark);
+  color: #fff;
+  font-family: 'Roboto Condensed', sans-serif;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* ─── Background ─── */
+.bg {
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%, rgba(255,121,25,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(0,60,120,0.2) 0%, transparent 60%),
+    linear-gradient(160deg, #0a0a0f 0%, #0d1b2a 100%);
+}
+
+.grid-lines {
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridDrift 40s linear infinite;
+}
+@keyframes gridDrift {
+  from { background-position: 0 0; }
+  to   { background-position: 60px 60px; }
+}
+
+.sweep {
+  position: fixed; inset: 0; z-index: 0;
+  background: linear-gradient(120deg, transparent 40%, rgba(255,121,25,0.05) 50%, transparent 60%);
+  animation: sweep 8s ease-in-out infinite;
+}
+@keyframes sweep {
+  0%,100% { transform: translateX(-100%); }
+  50%     { transform: translateX(100%); }
+}
+
+/* ─── Particles ─── */
+.particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.particle {
+  position: absolute; border-radius: 50%; background: var(--red); opacity: 0;
+  animation: floatUp var(--dur, 8s) var(--delay, 0s) ease-in infinite;
+}
+@keyframes floatUp {
+  0%   { transform: translateY(110vh) scale(0); opacity: 0; }
+  10%  { opacity: var(--op, 0.4); }
+  90%  { opacity: var(--op, 0.4); }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+
+/* ─── Scanlines ─── */
+.scanlines {
+  position: fixed; inset: 0; z-index: 50;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
+}
+
+/* ─── Top Bar ─── */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--topbar-h);
+  z-index: 20;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px;
+  background: rgba(10,10,15,0.92);
+  border-bottom: 2px solid var(--red);
+  backdrop-filter: blur(8px);
+}
+.logo {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.05rem; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase;
+}
+.logo span { color: var(--red); }
+.live-badge {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; color: #aaa;
+}
+.live-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #555; animation: blink 1.4s ease-in-out infinite;
+}
+.live-dot.active { background: var(--red-bright); box-shadow: 0 0 8px var(--red-bright); }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+.topbar-time {
+  font-size: 0.82rem; letter-spacing: 0.06em; color: #777;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Ticker ─── */
+.ticker-wrap {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  height: var(--ticker-h);
+  z-index: 20;
+  background: var(--red);
+  display: flex; align-items: center;
+  overflow: hidden;
+}
+.ticker-tag {
+  flex-shrink: 0;
+  background: #111;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 0 18px; height: 100%;
+  display: flex; align-items: center; z-index: 2;
+}
+.ticker-track {
+  display: flex; align-items: center;
+  white-space: nowrap;
+  animation: ticker 35s linear infinite;
+}
+.ticker-item {
+  font-size: 0.76rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: #fff; padding: 0 24px;
+  display: flex; align-items: center; gap: 10px;
+}
+.ticker-sep { color: rgba(255,255,255,0.45); font-size: 0.55rem; }
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─── Shared keyframes ─── */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
