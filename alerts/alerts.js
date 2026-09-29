@@ -74,7 +74,8 @@ const ALERT_TYPES = {
     color:     '#CC1500',
     hold:      5000,
     getName:   d => d.name || 'Someone',
-    getAction: d => d.recipient ? `gifted a sub to ${d.recipient}!` : 'gifted a sub!',
+    getAction: d => d.recipient ? `gifted a sub to ${d.recipient}!`
+                  : d.count > 1 ? `gifted ${d.count} subs!` : 'gifted a sub!',
     getSub:    () => 'Thank you!',
   },
 };
@@ -96,7 +97,13 @@ function doRingFlash(color) {
 const queue   = [];
 let isShowing = false;
 
-function enqueue(type, data = {}) {
+// Lets other overlays (e.g. the scoreboard) react to test alerts.
+// Real Twitch events skip this — each overlay gets those from Twitch directly.
+let eventChannel = null;
+try { eventChannel = new BroadcastChannel('stream-events'); } catch (e) {}
+
+function enqueue(type, data = {}, fromTwitch = false) {
+  if (eventChannel && !fromTwitch) eventChannel.postMessage({ type, name: data.name, count: data.count });
   queue.push({ type, data });
   if (!isShowing) showNext();
 }
@@ -185,6 +192,9 @@ document.addEventListener('keydown', e => {
   }
 });
 
+// ── Live Twitch events ────────────────────────────────────
+connectTwitch((type, data) => enqueue(type, data, true));
+
 // ── URL param demo trigger ────────────────────────────────
 const params = new URLSearchParams(window.location.search);
 const demo   = params.get('demo');
@@ -192,7 +202,7 @@ if (demo && ALERT_TYPES[demo]) {
   setTimeout(() => {
     enqueue(demo, {
       name:      params.get('name')             || 'TestViewer',
-      count:     parseInt(params.get('count'))  || 50,
+      count:     parseInt(params.get('count'))  || (demo === 'gift' ? 1 : 50),
       amount:    parseInt(params.get('amount')) || 100,
       tier:      parseInt(params.get('tier'))   || 1,
       months:    parseInt(params.get('months')) || 0,

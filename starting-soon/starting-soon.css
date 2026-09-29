@@ -103,6 +103,11 @@
   font-variant-numeric: tabular-nums;
 }
 .stat-value.gold { color: var(--gold); }
+.stat-value--game {
+  max-width: 340px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  text-transform: uppercase;
+}
 .stat-label {
   font-size: 0.6rem; letter-spacing: 0.2em;
   text-transform: uppercase; color: #666; margin-top: 2px;

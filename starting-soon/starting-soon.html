@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="../shared/shared.css" />
   <link rel="stylesheet" href="starting-soon.css" />
 </head>
+
 <body>
 
   <!-- Background layers -->
@@ -65,11 +67,11 @@
         <div class="stat-label">Countdown</div>
       </div>
       <div class="stat-card">
-        <div class="stat-value" id="viewerCount">–</div>
+        <div class="stat-value" id="viewerCount" style="font-variant-numeric: tabular-nums">–</div>
         <div class="stat-label">Viewers Waiting</div>
       </div>
       <div class="stat-card">
-        <div class="stat-value" id="sessionNum">#1</div>
+        <div class="stat-value stat-value--game" id="gameName">–</div>
         <div class="stat-label">Today's Stream</div>
       </div>
     </div>
@@ -83,6 +85,9 @@
 
   <script src="../shared/shared.js"></script>
   <script src="../shared/config.js"></script>
+  <script src="../shared/twitch-secrets.js"></script>
+  <script src="../shared/twitch.js"></script>
   <script src="starting-soon.js"></script>
 </body>
+
 </html>

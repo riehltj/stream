@@ -1,0 +1,143 @@
+/* Transparent OBS browser source — override shared body background */
+html, body { background: transparent; }
+
+:root {
+  --home:   var(--red);
+  --away:   #1f4e8c;
+  --bug-h:  58px;
+}
+
+/* ─── Wrapper: bottom-center ─── */
+.sb-wrap {
+  position: fixed;
+  left: 50%; bottom: 24px;
+  transform: translateX(-50%);
+  z-index: 30;
+}
+
+/* ─── Score bug ─── */
+.scorebug {
+  display: flex; align-items: stretch;
+  height: var(--bug-h);
+  background: rgba(10,10,15,0.95);
+  border-top: 2px solid var(--red);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.55);
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  animation: bugIn 0.7s cubic-bezier(.2,.9,.3,1.15) both;
+}
+@keyframes bugIn {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.sb-brand {
+  width: var(--bug-h);
+  display: flex; align-items: center; justify-content: center;
+  background: #111;
+  font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em;
+  color: var(--red);
+}
+
+/* ─── Team blocks ─── */
+.team {
+  position: relative;
+  display: flex; align-items: center; gap: 10px;
+  min-width: 230px;
+  padding: 0 18px;
+  background: var(--team);
+  overflow: hidden;
+}
+.team::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,0) 30%, rgba(0,0,0,0.45) 100%);
+}
+.team > * { position: relative; }
+.team--home { --team: var(--home); }
+.team--away { --team: var(--away); }
+
+.team-name {
+  font-size: 1.2rem; font-weight: 700; letter-spacing: 0.08em;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+.team-poss {
+  font-size: 0.9rem;
+  opacity: 0; transform: scale(0.4);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.team.has-ball .team-poss { opacity: 1; transform: scale(1); }
+.team-score {
+  margin-left: auto;
+  font-size: 2.1rem; font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+.team.scored .team-score { animation: scorePop 0.6s ease-out; }
+.team.scored::after {
+  content: ''; position: absolute; inset: 0;
+  background: #fff;
+  animation: teamFlash 0.6s ease-out forwards;
+}
+@keyframes scorePop {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.35); color: var(--gold); }
+  100% { transform: scale(1); }
+}
+@keyframes teamFlash {
+  from { opacity: 0.55; }
+  to   { opacity: 0; }
+}
+
+/* ─── Clock + down & distance ─── */
+.sb-clock {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-width: 96px; padding: 0 16px;
+  background: #16161f;
+  border-left: 1px solid var(--border);
+}
+.sb-qtr  { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; color: var(--red-bright); }
+.sb-time { font-size: 1.25rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+.sb-down {
+  display: flex; align-items: center;
+  min-width: 128px; padding: 0 18px;
+  background: var(--gold); color: #111;
+  font-size: 0.95rem; font-weight: 700; letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+.sb-down.swap { animation: fadeSlideUp 0.4s ease-out; }
+
+/* ─── Play banner ─── */
+.play-banner {
+  position: absolute; left: 0; right: 0; bottom: 100%;
+  margin-bottom: 6px;
+  padding: 10px 22px;
+  display: flex; align-items: baseline; gap: 16px;
+  background: var(--banner, var(--red));
+  border-left: 6px solid #fff;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  opacity: 0;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.35s cubic-bezier(.2,.9,.3,1), opacity 0.2s;
+}
+.play-banner.show { opacity: 1; clip-path: inset(0 0 0 0); }
+.play-banner[data-kind="td"]   { --banner: var(--red); }
+.play-banner[data-kind="xp"]   { --banner: #1c7c3c; }
+.play-banner[data-kind="fg"]   { --banner: #C8920A; }
+.play-banner[data-kind="miss"] { --banner: #5a1010; }
+
+.play-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.7rem; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; white-space: nowrap;
+}
+.play-banner.show .play-title { animation: titleSlam 0.5s cubic-bezier(.2,.9,.3,1.2); }
+@keyframes titleSlam {
+  from { letter-spacing: 0.6em; opacity: 0; }
+  to   { letter-spacing: 0.18em; opacity: 1; }
+}
+.play-sub {
+  font-size: 0.95rem; font-weight: 700; letter-spacing: 0.05em;
+  text-transform: uppercase; color: rgba(255,255,255,0.85);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}

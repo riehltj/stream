@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scoreboard</title>
+  <link rel="stylesheet" href="../shared/shared.css" />
+  <link rel="stylesheet" href="scoreboard.css" />
+</head>
+<body>
+
+  <div class="sb-wrap">
+
+    <!-- Play banner — slides up above the bug on a score -->
+    <div class="play-banner" id="playBanner">
+      <div class="play-title" id="playTitle"></div>
+      <div class="play-sub" id="playSub"></div>
+    </div>
+
+    <!-- Score bug -->
+    <div class="scorebug">
+      <div class="sb-brand" id="brand"></div>
+
+      <div class="team team--home" id="teamHome">
+        <div class="team-name" id="homeName"></div>
+        <div class="team-poss">🏈</div>
+        <div class="team-score" id="homeScore">0</div>
+      </div>
+
+      <div class="team team--away" id="teamAway">
+        <div class="team-name" id="awayName"></div>
+        <div class="team-poss">🏈</div>
+        <div class="team-score" id="awayScore">0</div>
+      </div>
+
+      <div class="sb-clock">
+        <div class="sb-qtr" id="qtr">1ST</div>
+        <div class="sb-time" id="gameClock">15:00</div>
+      </div>
+
+      <div class="sb-down" id="downDist">1ST &amp; 10</div>
+    </div>
+
+  </div>
+
+  <script src="../shared/config.js"></script>
+  <script src="../shared/twitch-secrets.js"></script>
+  <script src="../shared/twitch.js"></script>
+  <script src="scoreboard.js"></script>
+</body>
+</html>

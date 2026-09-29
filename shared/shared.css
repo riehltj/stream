@@ -139,8 +139,8 @@ body {
 .ticker-item {
   font-size: 0.76rem; font-weight: 700;
   letter-spacing: 0.06em; text-transform: uppercase;
-  color: #fff; padding: 0 24px;
-  display: flex; align-items: center; gap: 10px;
+  color: #fff; padding-left: 24px;
+  display: flex; align-items: center; gap: 24px; /* matches padding so ◆ is centered between items */
 }
 .ticker-sep { color: rgba(255,255,255,0.45); font-size: 0.55rem; }
 @keyframes ticker {

@@ -3,39 +3,40 @@
 // ════════════════════════════════════════════════════════════
 
 const CATEGORY_COLORS = {
-  NBA:    '#6B2FAF',
-  NFL:    '#D50A0A',
-  MLB:    '#003087',
-  NHL:    '#0038A8',
-  UFC:    '#CC0000',
-  GOLF:   '#1a6b1a',
-  STREAM: '#FF7919',
+  CHAT:    '#6B2FAF',
+  RANKED:  '#D50A0A',
+  TECH:    '#0d6efd',
+  LORE:    '#C8920A',
+  SNACKS:  '#1a8a3a',
+  CLIPS:   '#CC0000',
+  STREAM:  '#FF7919',
 };
 
 const headlines = [
-  { category: 'NBA',    title: 'LeBron Drops 40 in OT Thriller',       desc: 'Lakers edge the Celtics in overtime as James delivers another clutch performance in Boston.' },
-  { category: 'NFL',    title: "Chiefs Dynasty Run Isn't Over",         desc: "Patrick Mahomes leads Kansas City to another AFC Championship — the critics keep getting quieter." },
-  { category: 'MLB',    title: 'Ohtani Hits Walk-Off Grand Slam',       desc: 'Shohei Ohtani goes full two-way legend mode with a walk-off in the 10th inning.' },
-  { category: 'UFC',    title: 'Jon Jones Defends Title Again',         desc: "Bones Jones puts on a striking clinic and cements his status as the sport's GOAT." },
-  { category: 'NBA',    title: 'Wembanyama Named All-Star Starter',     desc: 'Victor Wembanyama earns his first All-Star selection after a dominant first half of the season.' },
-  { category: 'NFL',    title: 'College Football Playoff Expands',      desc: 'The 12-team CFP format delivers chaos as all four No.1 seeds are eliminated in the quarterfinals.' },
-  { category: 'NHL',    title: 'McDavid Breaks Points Record',          desc: "Connor McDavid surpasses Gretzky's single-season point pace as the Oilers surge in the West." },
-  { category: 'MLB',    title: 'Spring Training Storylines',            desc: 'Rookie arms and veteran bats headline a loaded opening day roster battle across the majors.' },
-  { category: 'GOLF',   title: 'Masters Preview: Who Wins Augusta?',    desc: 'Rory McIlroy looks to complete the career grand slam as the world No.1 heads to Augusta.' },
-  { category: 'STREAM', title: "Stream's Starting Soon!",               desc: "Get comfortable — we're loading up the best content and getting ready to go live." },
+  { category: 'STREAM', title: 'Streamer Says "Just One More Game"',     desc: 'Sources confirm this is the fourth "one more game" of the night. Experts expect at least six more.' },
+  { category: 'CHAT',   title: 'Chat Confidently Backseats Again',        desc: 'Viewers who have never played the game offer detailed strategy. Streamer ignores all of it, loses anyway.' },
+  { category: 'TECH',   title: 'Mic Was Muted for 20 Minutes',            desc: 'Local streamer delivers best bit of the year to absolutely no one. Chat spammed "MIC" 400 times.' },
+  { category: 'RANKED', title: 'Rank Plummets After "Warmup" Games',      desc: 'The warmup did not work. Analysts are calling it "the worst warmup in recorded history."' },
+  { category: 'SNACKS', title: 'Snack Break Runs 14 Minutes Over',        desc: 'Streamer insists the microwave "was being weird." BRB screen now has more watch time than gameplay.' },
+  { category: 'CLIPS',  title: 'Clip of Streamer Walking Off Ledge Goes Viral', desc: 'The clip has been watched 11 times, 9 of which were by the streamer. Still counts.' },
+  { category: 'LORE',   title: 'Chat Invents Inside Joke, Refuses to Explain', desc: 'New viewers left confused. Veterans say "you had to be there." Nobody remembers where it started.' },
+  { category: 'TECH',   title: 'OBS Crashes During Best Play Ever',       desc: 'Witnesses say it was incredible. There is no footage. There will never be footage.' },
+  { category: 'RANKED', title: 'Teammate Says "Trust Me Bro," Was Wrong', desc: 'Investigation ongoing. Early reports indicate the teammate should not have been trusted.' },
+  { category: 'CHAT',   title: 'Lurker Speaks for First Time in 6 Months', desc: 'The message was "lol." Community celebrates. Streamer visibly emotional.' },
+  { category: 'STREAM', title: 'Starting Soon Actually Starting Soon',    desc: "In a stunning turn of events, the stream is almost ready. Grab a drink — we're about to go live." },
 ];
 
 // Replace `url` values with your actual GIF/image URLs
 const funnyContent = [
-  { url: '', title: 'When your build compiles first try' },
-  { url: '', title: 'Me trying to read patch notes' },
-  { url: '', title: 'The whole chat when I miss a shot' },
-  { url: '', title: 'My reaction to losing 1 HP' },
-  { url: '', title: 'Chat when there is a new bug' },
-  { url: '', title: 'Teammate: trust me bro' },
-  { url: '', title: 'When the final boss has a second form' },
-  { url: '', title: 'Me vs. ranked queue' },
-  { url: '', title: 'New update dropped' },
+  { url: '', title: 'Me after saying "easy" out loud' },
+  { url: '', title: 'Chat watching me miss a wide open shot' },
+  { url: '', title: 'Me at 1 HP thinking I can win this' },
+  { url: '', title: 'Teammate: "trust me bro"' },
+  { url: '', title: 'Me reading chat instead of playing' },
+  { url: '', title: 'When the game patches 5 min before stream' },
+  { url: '', title: 'Me realizing I was muted' },
+  { url: '', title: 'Chat when I blame lag' },
+  { url: '', title: 'The final boss has a second health bar' },
 ];
 
 const HEADLINE_ROTATE_MS  = 8000;
@@ -53,14 +54,14 @@ const VISIBLE_ITEMS = 6;
 initClock('clock');
 initParticles('particles', 20);
 initTicker('tickerTrack', [
-  'Stream starting up — grab a snack',
-  'Follow to never miss a stream',
-  'Chat rules: keep it hype & respectful',
-  'Check out the Discord for community chat',
-  'Hit that subscribe button',
-  "Today's content loading up",
-  'Turn up the volume',
-  'Raids and hosts always welcome',
+  'Loading… this is not lag, it is anticipation',
+  'Follow so the algorithm thinks we are cool',
+  'Backseating is legal here but it will be ignored',
+  'Streamer reportedly "almost ready" for the third time',
+  'Subs fund the snack budget — think of the snacks',
+  'Discord is open — come argue about loadouts',
+  'Hydrate. Stretch. Blame lag.',
+  'Raids welcome — we promise to act normal',
 ]);
 
 // ── Left Panel Headlines ──────────────────────────────────────
