@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Offline</title>
+  <link rel="stylesheet" href="../shared/shared.css" />
+  <link rel="stylesheet" href="offline.css" />
+</head>
+<body>
+
+  <!-- Static offline screen (1920 × 1080). Exported to offline.png for
+       Twitch's "Video Player Banner"; also works as a browser source. -->
+
+  <!-- Background -->
+  <div class="bg"></div>
+  <div class="off-grid"></div>
+
+  <!-- Corner accents -->
+  <div class="corner corner--tl"></div>
+  <div class="corner corner--tr"></div>
+  <div class="corner corner--bl"></div>
+  <div class="corner corner--br"></div>
+
+  <main class="off-main">
+    <div class="off-logo" data-logo></div>
+
+    <div class="off-eyebrow"><span class="off-dot"></span>Stream Offline</div>
+
+    <div class="off-heading-wrap">
+      <div class="off-heading-bg">Offline</div>
+      <div class="off-heading">
+        <span class="off-line1">See You</span>
+        <span class="off-line2">Next Stream</span>
+      </div>
+    </div>
+
+    <div class="off-divider"></div>
+
+    <div class="off-sub">Follow to get notified the second we go live</div>
+
+    <div class="off-socials">
+      <div class="off-chip">
+        <span class="off-chip-icon off-chip-icon--twitch" data-brand="twitch"></span>
+        <div>
+          <div class="off-chip-platform">Twitch</div>
+          <div class="off-chip-handle" id="twitchHandle"></div>
+        </div>
+      </div>
+      <div class="off-chip">
+        <span class="off-chip-icon off-chip-icon--youtube" data-brand="youtube"></span>
+        <div>
+          <div class="off-chip-platform">YouTube</div>
+          <div class="off-chip-handle" id="youtubeHandle"></div>
+        </div>
+      </div>
+      <div class="off-chip">
+        <span class="off-chip-icon off-chip-icon--x" data-brand="x"></span>
+        <div>
+          <div class="off-chip-platform">X</div>
+          <div class="off-chip-handle" id="twitterHandle"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bottom brand strip -->
+  <div class="off-footer">
+    <div class="off-brand"><span class="brand-mark" data-logo></span><span id="brandName"></span></div>
+    <div class="off-tagline" id="tagline"></div>
+  </div>
+
+  <script src="../shared/config.js"></script>
+  <script src="../shared/icons.js"></script>
+  <script src="../shared/logo.js"></script>
+  <script>
+    document.getElementById('twitchHandle').textContent  = '/' + STREAMER.twitch;
+    document.getElementById('youtubeHandle').textContent = STREAMER.youtube;
+    document.getElementById('twitterHandle').textContent = STREAMER.twitter;
+    document.getElementById('brandName').textContent     = STREAMER.brand;
+    document.getElementById('tagline').textContent       = STREAMER.handle;
+  </script>
+</body>
+</html>

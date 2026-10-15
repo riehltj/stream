@@ -11,13 +11,14 @@
 
   <!-- Browser source size: 350 × 34 -->
   <div class="brand-bug">
-    <div class="bug-logo"><span>■</span> <span id="bugBrand">StreamCenter</span></div>
+    <div class="bug-logo"><span class="brand-mark" data-logo></span><span id="bugBrand">StreamCenter</span></div>
     <div class="bug-live"><div class="live-dot active"></div>Live</div>
     <div class="bug-time" id="clock"></div>
   </div>
 
   <script src="../shared/shared.js"></script>
   <script src="../shared/config.js"></script>
+  <script src="../shared/logo.js"></script>
   <script>
     document.getElementById('bugBrand').textContent = STREAMER.brand;
     initClock('clock');

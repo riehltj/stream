@@ -92,11 +92,24 @@ body {
   backdrop-filter: blur(8px);
 }
 .logo {
+  display: flex; align-items: center; gap: 10px;
   font-family: 'Oswald', sans-serif;
   font-size: 1.05rem; font-weight: 700;
   letter-spacing: 0.15em; text-transform: uppercase;
 }
-.logo span { color: var(--red); }
+
+/* HR logo (shared/logo.js) — sized by its container */
+.brand-mark { display: flex; flex-shrink: 0; }
+.brand-mark .hr-logo, .hr-logo { display: block; width: 100%; height: 100%; }
+.logo .brand-mark { width: 30px; height: 30px; }
+
+/* Big logo that spins + scales in (intro / outro) — add .show to play */
+.logo-reveal { width: 110px; height: 110px; margin-bottom: 22px; opacity: 0; }
+.logo-reveal.show { animation: logoReveal 0.7s cubic-bezier(.2,.9,.3,1.2) forwards; }
+@keyframes logoReveal {
+  from { opacity: 0; transform: scale(0.6) rotate(-90deg); }
+  to   { opacity: 1; transform: scale(1) rotate(0); }
+}
 .live-badge {
   display: flex; align-items: center; gap: 6px;
   font-size: 0.68rem; font-weight: 700;

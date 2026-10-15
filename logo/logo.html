@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HR Logo</title>
+  <link rel="stylesheet" href="../shared/shared.css" />
+  <style>
+    body { height: auto; min-height: 100vh; overflow: auto; background: #15151c; }
+    .sheet { padding: 40px; display: flex; flex-direction: column; gap: 40px; }
+
+    .row h2 {
+      margin-bottom: 14px;
+      font-family: 'Oswald', sans-serif; font-weight: 600;
+      font-size: 0.9rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--red);
+    }
+    .tiles { display: flex; gap: 20px; flex-wrap: wrap; }
+    .tile {
+      width: 300px; height: 300px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .tile svg { width: 220px; height: 220px; }
+    .tile--dark  { background: linear-gradient(160deg, #0a0a0f, #0d1b2a); }
+    .tile--light { background: #f1f1f1; }
+
+    /* Small-size check + wordmark lockup */
+    .tile--small { flex-direction: column; gap: 36px; }
+    .mini svg { width: 48px; height: 48px; }
+    .lockup { display: flex; align-items: center; gap: 14px; }
+    .lockup-mark svg { width: 64px; height: 64px; }
+    .lockup-text {
+      display: flex; flex-direction: column;
+      font-family: 'Oswald', sans-serif; text-transform: uppercase; line-height: 1;
+    }
+    .lockup-text span  { font-size: 2rem; font-weight: 700; letter-spacing: 0.08em; }
+    .lockup-text small { margin-top: 4px; font-size: 0.8rem; letter-spacing: 0.45em; color: var(--red); }
+
+    /* Export mode */
+    .single .sheet { padding: 0; }
+    .solo svg { display: block; width: 100vmin; height: 100vmin; }
+    .no-bg { background: transparent; }
+    .avatar {
+      width: 100vmin; height: 100vmin;
+      display: flex; align-items: center; justify-content: center;
+      background: radial-gradient(circle at 30% 20%, rgba(255,121,25,0.14), transparent 60%),
+                  linear-gradient(160deg, #0a0a0f, #0d1b2a);
+    }
+    .avatar .hr-logo { width: 68%; height: 68%; }
+  </style>
+</head>
+<body>
+  <main class="sheet" id="sheet"></main>
+  <script src="../shared/logo.js"></script>
+  <script src="logo.js"></script>
+</body>
+</html>

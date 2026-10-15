@@ -40,6 +40,7 @@ const cineTop = document.getElementById('cineTop');
 const cineBot = document.getElementById('cineBot');
 const flash = document.getElementById('flash');
 const shockwave = document.getElementById('shockwave');
+const introLogo = document.getElementById('introLogo');
 const eyebrowEl = document.getElementById('eyebrow');
 const titleEl = document.getElementById('titleEl');
 const titleGhost = document.getElementById('titleGhost');
@@ -126,6 +127,7 @@ function reset() {
   cineTop.classList.add('closed');
   cineBot.classList.add('closed');
 
+  introLogo.classList.remove('show');
   eyebrowEl.classList.remove('show');
   titleEl.classList.remove('slam');
   titleGhost.classList.remove('glitch');
@@ -144,6 +146,7 @@ function reset() {
 function runSequence() {
   at(200, () => { cineTop.classList.remove('closed'); cineBot.classList.remove('closed'); cineTop.classList.add('open'); cineBot.classList.add('open'); });
   at(480, doFlash);
+  at(520, () => introLogo.classList.add('show'));
   at(720, () => eyebrowEl.classList.add('show'));
   at(1000, () => { titleGhost.classList.add('glitch'); setTimeout(() => { titleEl.classList.add('slam'); doShockwave(); doBurst(); }, 80); });
   at(1380, () => divider.classList.add('expand'));

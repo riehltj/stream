@@ -29,6 +29,7 @@ const outroTitle   = document.getElementById('outroTitle');
 const outroDivider = document.getElementById('outroDivider');
 const outroTagline = document.getElementById('outroTagline');
 const socialsRow   = document.getElementById('socialsRow');
+const outroLogo   = document.getElementById('outroLogo');
 const followCta    = document.getElementById('followCta');
 const twitchHandle = document.getElementById('twitchHandle');
 const twitterHandle= document.getElementById('twitterHandle');
@@ -100,6 +101,7 @@ function runOutro() {
   raidStage.classList.add('hidden');
 
   at(200,  doFlash);
+  at(300,  () => outroLogo.classList.add('show'));
   at(500,  () => outroEyebrow.classList.add('show'));
   at(900,  () => { outroTitle.classList.add('show'); doBurst(); });
   at(1300, () => outroDivider.classList.add('expand'));
