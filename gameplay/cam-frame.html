@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cam Frame</title>
+  <link rel="stylesheet" href="../shared/shared.css" />
+  <link rel="stylesheet" href="gameplay.css" />
+</head>
+<body>
+
+  <!-- Browser source size: any — frame fills it (e.g. 406 × 231 for a 400 × 225 cam)
+       ?label=Cam+1 sets the chip text, ?label= (empty) hides it -->
+  <div class="cam-frame">
+    <div class="cam-corner cam-corner--tl"></div>
+    <div class="cam-corner cam-corner--tr"></div>
+    <div class="cam-corner cam-corner--bl"></div>
+    <div class="cam-corner cam-corner--br"></div>
+    <div class="cam-chip" id="camChip">Cam 1</div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const chip   = document.getElementById('camChip');
+    if (params.has('label')) {
+      chip.textContent = params.get('label');
+      if (!chip.textContent) chip.remove();
+    }
+  </script>
+</body>
+</html>

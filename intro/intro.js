@@ -23,48 +23,48 @@
 const params = new URLSearchParams(window.location.search);
 
 const config = {
-  eyebrow:    params.get('label')  || 'WELCOME TO',
-  titleLine1: params.get('title')  || 'HIGHLIGHT',
+  eyebrow: params.get('label') || 'WELCOME TO',
+  titleLine1: params.get('title') || "HIGHLIGHT's",
   titleLine2: params.get('title2') || '',
-  tagline:    params.get('sub')    || 'StreamCenter · Live',
-  liveSub:    STREAMER.brand,
-  badge:      params.get('badge')  || '',
-  loopMs:     parseInt(params.get('loop')) || 5500,
+  tagline: params.get('sub') || 'StreamCenter · Live',
+  liveSub: STREAMER.brand,
+  badge: params.get('badge') || '',
+  loopMs: parseInt(params.get('loop')) || 5500,
 };
 
 // ════════════════════════════════════════════════════════════
 //  INTERNALS
 // ════════════════════════════════════════════════════════════
 
-const cineTop    = document.getElementById('cineTop');
-const cineBot    = document.getElementById('cineBot');
-const flash      = document.getElementById('flash');
-const shockwave  = document.getElementById('shockwave');
-const eyebrowEl  = document.getElementById('eyebrow');
-const titleEl    = document.getElementById('titleEl');
+const cineTop = document.getElementById('cineTop');
+const cineBot = document.getElementById('cineBot');
+const flash = document.getElementById('flash');
+const shockwave = document.getElementById('shockwave');
+const eyebrowEl = document.getElementById('eyebrow');
+const titleEl = document.getElementById('titleEl');
 const titleGhost = document.getElementById('titleGhost');
-const divider    = document.getElementById('introDivider');
-const taglineEl  = document.getElementById('taglineEl');
-const liveRow    = document.getElementById('liveRow');
-const liveSubEl  = document.getElementById('liveSubEl');
-const seasonBadge= document.getElementById('seasonBadge');
-const burst      = document.getElementById('burst');
-const corners    = ['cornerTL','cornerTR','cornerBL','cornerBR'].map(id => document.getElementById(id));
+const divider = document.getElementById('introDivider');
+const taglineEl = document.getElementById('taglineEl');
+const liveRow = document.getElementById('liveRow');
+const liveSubEl = document.getElementById('liveSubEl');
+const seasonBadge = document.getElementById('seasonBadge');
+const burst = document.getElementById('burst');
+const corners = ['cornerTL', 'cornerTR', 'cornerBL', 'cornerBR'].map(id => document.getElementById(id));
 
 // ── Build content from config ─────────────────────────────────
 function buildContent() {
   eyebrowEl.textContent = config.eyebrow;
 
   if (config.titleLine2) {
-    titleEl.innerHTML    = `<span class="line1">${config.titleLine1}</span><span class="line2">${config.titleLine2}</span>`;
+    titleEl.innerHTML = `<span class="line1">${config.titleLine1}</span><span class="line2">${config.titleLine2}</span>`;
     titleGhost.innerHTML = `<span>${config.titleLine1}</span><span>${config.titleLine2}</span>`;
   } else {
-    titleEl.textContent    = config.titleLine1;
+    titleEl.textContent = config.titleLine1;
     titleGhost.textContent = config.titleLine1;
   }
 
-  taglineEl.textContent   = config.tagline;
-  liveSubEl.textContent   = config.liveSub;
+  taglineEl.textContent = config.tagline;
+  liveSubEl.textContent = config.liveSub;
   seasonBadge.textContent = config.badge;
 
   // Hide season badge if empty
@@ -85,14 +85,14 @@ function doFlash() {
 function doBurst() {
   burst.innerHTML = '';
   const colors = ['#FF7919', '#FF9940', '#fff', '#f5a623', '#FF7919'];
-  const COUNT  = 50;
+  const COUNT = 50;
   for (let i = 0; i < COUNT; i++) {
-    const p     = document.createElement('div');
+    const p = document.createElement('div');
     p.className = 'burst-p';
     const angle = (360 / COUNT) * i + (Math.random() - 0.5) * (360 / COUNT);
-    const dist  = Math.random() * 280 + 80;
-    const size  = Math.random() * 5 + 2;
-    const dur   = Math.random() * 0.4 + 0.5;
+    const dist = Math.random() * 280 + 80;
+    const size = Math.random() * 5 + 2;
+    const dur = Math.random() * 0.4 + 0.5;
     p.style.cssText = `
       width:${size}px; height:${size}px;
       background:${colors[Math.floor(Math.random() * colors.length)]};
@@ -129,7 +129,7 @@ function reset() {
   eyebrowEl.classList.remove('show');
   titleEl.classList.remove('slam');
   titleGhost.classList.remove('glitch');
-  titleEl.style.opacity    = '0';
+  titleEl.style.opacity = '0';
   titleGhost.style.opacity = '0';
 
   divider.classList.remove('expand');
@@ -142,9 +142,9 @@ function reset() {
 
 // ── Sequence timeline ─────────────────────────────────────────
 function runSequence() {
-  at(200,  () => { cineTop.classList.remove('closed'); cineBot.classList.remove('closed'); cineTop.classList.add('open'); cineBot.classList.add('open'); });
-  at(480,  doFlash);
-  at(720,  () => eyebrowEl.classList.add('show'));
+  at(200, () => { cineTop.classList.remove('closed'); cineBot.classList.remove('closed'); cineTop.classList.add('open'); cineBot.classList.add('open'); });
+  at(480, doFlash);
+  at(720, () => eyebrowEl.classList.add('show'));
   at(1000, () => { titleGhost.classList.add('glitch'); setTimeout(() => { titleEl.classList.add('slam'); doShockwave(); doBurst(); }, 80); });
   at(1380, () => divider.classList.add('expand'));
   at(1680, () => taglineEl.classList.add('show'));
@@ -165,7 +165,7 @@ function at(ms, fn) { return setTimeout(fn, ms); }
 // ── Space to replay ───────────────────────────────────────────
 document.addEventListener('keydown', e => {
   if (e.code === 'Space') {
-    const highest = setTimeout(() => {}, 0);
+    const highest = setTimeout(() => { }, 0);
     for (let i = 0; i <= highest; i++) clearTimeout(i);
     reset();
     setTimeout(runSequence, 300);

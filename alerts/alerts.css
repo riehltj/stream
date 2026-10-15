@@ -78,6 +78,7 @@ html, body {
   color: rgba(255,255,255,0.8);
   position: relative; z-index: 2;
 }
+.top-badge .icon { width: 24px; height: 24px; color: #fff; }
 
 /* Vertical separator */
 .top-sep {

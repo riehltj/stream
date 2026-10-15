@@ -142,8 +142,12 @@ body {
   padding: 10px 18px;
 }
 .social-icon {
-  font-size: 1.1rem; line-height: 1;
+  width: 22px; height: 22px; flex-shrink: 0;
+  fill: currentColor;
 }
+.social-icon--twitch  { color: #9146FF; }
+.social-icon--x       { color: #fff; }
+.social-icon--youtube { color: #FF0000; }
 .social-info { text-align: left; }
 .social-platform {
   font-family: 'Oswald', sans-serif;

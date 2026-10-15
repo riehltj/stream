@@ -1,0 +1,99 @@
+/* ════════════════════════════════════════════════════════════
+   GAMEPLAY COMPONENTS — shared by brand-bug, cam-frame, nameplate
+
+   Each component fills its whole browser source, so size the
+   source to what you want and move it anywhere in your scene.
+   ════════════════════════════════════════════════════════════ */
+
+/* Transparent browser source — override shared body background */
+html, body { background: transparent; }
+
+/* ─── Brand bug ─── */
+.brand-bug {
+  position: fixed; inset: 0;
+  display: flex; align-items: stretch;
+  background: rgba(10,10,15,0.88);
+  border-left: 3px solid var(--red);
+  text-transform: uppercase;
+  animation: fadeIn 0.7s ease both;
+}
+.brand-bug > div {
+  display: flex; align-items: center;
+  padding: 0 14px;
+  white-space: nowrap;
+}
+.brand-bug > div + div { border-left: 1px solid var(--border); }
+.bug-logo {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.85rem; font-weight: 700; letter-spacing: 0.15em;
+}
+.bug-logo span:first-child { color: var(--red); margin-right: 6px; }
+.bug-live {
+  gap: 6px;
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; color: #ccc;
+}
+.bug-time {
+  flex: 1;
+  font-size: 0.72rem; letter-spacing: 0.06em; color: #888;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Webcam frame ─── */
+/* Corners stick out 3px past the border, so the border sits 3px in */
+.cam-frame {
+  position: fixed; inset: 3px;
+  border: 1px solid rgba(255,255,255,0.12);
+  animation: fadeIn 0.7s ease both;
+}
+.cam-corner {
+  position: absolute; width: 22px; height: 22px;
+  border: 0 solid var(--red);
+}
+.cam-corner--tl { top: -3px;    left: -3px;  border-top-width: 3px;    border-left-width: 3px; }
+.cam-corner--tr { top: -3px;    right: -3px; border-top-width: 3px;    border-right-width: 3px; }
+.cam-corner--bl { bottom: -3px; left: -3px;  border-bottom-width: 3px; border-left-width: 3px; }
+.cam-corner--br { bottom: -3px; right: -3px; border-bottom-width: 3px; border-right-width: 3px; }
+
+.cam-chip {
+  position: absolute; top: 10px; right: 10px;
+  padding: 3px 8px;
+  background: rgba(10,10,15,0.8);
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.6rem; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase; color: #aaa;
+}
+
+/* ─── Nameplate ─── */
+.nameplate {
+  position: fixed; inset: 0;
+  display: flex; align-items: stretch;
+  background: rgba(10,10,15,0.92);
+  border-bottom: 2px solid var(--red);
+  overflow: hidden;
+  animation: fadeIn 0.7s ease both;
+}
+.np-name {
+  flex-shrink: 0;
+  display: flex; align-items: center;
+  padding: 0 14px;
+  background: var(--red);
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.95rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.np-info {
+  flex: 1; min-width: 0;
+  display: flex; align-items: center;
+  padding: 0 14px;
+}
+.np-info-inner {
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase; color: #ddd;
+  transition: opacity 0.35s, transform 0.35s;
+}
+.np-info-inner.swapping { opacity: 0; transform: translateY(8px); }
+.np-label { color: var(--red); margin-right: 8px; }
+.np-info-inner.flash .np-label { color: var(--gold); }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }

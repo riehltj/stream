@@ -21,7 +21,8 @@
 //
 //  URL PARAMS:
 //    ?home=Highlight&away=Chat   — team names
-//    ?startHome=48&startAway=0   — starting score (used on reset)
+//    ?homeRank=1&awayRank=       — rankings (blank = unranked, or e.g. NR)
+//    ?startHome=49&startAway=0   — starting score (used on reset)
 //    ?scorer=home                — make subs score for the streamer instead
 //    ?reset                      — reset to starting score on load
 //    ?demo=sub&name=ChatGoat     — fire a sub on load
@@ -36,7 +37,9 @@ const intParam = (key, fallback) => {
 const CFG = {
   homeName: (params.get('home') || STREAMER.name).toUpperCase(),
   awayName: (params.get('away') || 'CHAT').toUpperCase(),
-  startHome: intParam('startHome', 48),
+  homeRank: params.has('homeRank') ? params.get('homeRank') : '1',
+  awayRank: params.get('awayRank') || '',   // unranked
+  startHome: intParam('startHome', 35),
   startAway: intParam('startAway', 0),
   scorer: params.get('scorer') === 'home' ? 'home' : 'away',
   fgChance: 0.20,   // chance a sub is a field goal instead of a TD
@@ -48,28 +51,23 @@ const STORAGE_KEY = 'scoreboard-state';
 
 const MISSES = [
   'Wide left', 'Wide right', 'Doinked off the upright',
-  'Blocked at the line', 'Bad snap', 'Hooked it',
+  'Blocked!', 'Bad snap', 'Hooked it',
 ];
 const TD_LINES = [
   'takes it to the house', 'punches it in', 'with the diving catch',
   'breaks three tackles', 'goes untouched', 'hurdles the safety',
 ];
 const FG_LINES = ['from 42 yards', 'from 38 yards', 'from 51 yards', 'from 27 yards'];
-const DOWNS = [
-  '1ST & 10', '2ND & 7', '3RD & 3', '2ND & 12', '3RD & LONG',
-  '4TH & 1', '1ST & GOAL', '3RD & 9', '2ND & 4',
-];
 const QUARTERS = ['1ST', '2ND', '3RD', '4TH', 'OT'];
 
 // ── DOM refs ──────────────────────────────────────────────
 const el = {
-  brand: document.getElementById('brand'),
   teams: { home: document.getElementById('teamHome'), away: document.getElementById('teamAway') },
   names: { home: document.getElementById('homeName'), away: document.getElementById('awayName') },
+  ranks: { home: document.getElementById('homeRank'), away: document.getElementById('awayRank') },
   scores: { home: document.getElementById('homeScore'), away: document.getElementById('awayScore') },
   qtr: document.getElementById('qtr'),
   clock: document.getElementById('gameClock'),
-  down: document.getElementById('downDist'),
   banner: document.getElementById('playBanner'),
   bannerTtl: document.getElementById('playTitle'),
   bannerSub: document.getElementById('playSub'),
@@ -77,7 +75,6 @@ const el = {
 
 const pick = arr => arr[Math.floor(Math.random() * arr.length)];
 const wait = ms => new Promise(r => setTimeout(r, ms));
-const other = team => (team === 'home' ? 'away' : 'home');
 
 // ── State (persisted) ─────────────────────────────────────
 function freshState() {
@@ -102,6 +99,7 @@ function saveState() {
 }
 
 let state = loadState();
+state.ball = CFG.scorer; // ball stays with whoever subs score for
 
 // ── Rendering ─────────────────────────────────────────────
 function renderClock() {
@@ -117,20 +115,14 @@ function renderBall() {
 }
 
 function renderAll() {
-  el.brand.textContent = STREAMER.brand.replace(/[^A-Z]/g, '') || 'SC';
   el.names.home.textContent = CFG.homeName;
   el.names.away.textContent = CFG.awayName;
+  el.ranks.home.textContent = CFG.homeRank.toUpperCase();
+  el.ranks.away.textContent = CFG.awayRank.toUpperCase();
   el.scores.home.textContent = state.home;
   el.scores.away.textContent = state.away;
   renderClock();
   renderBall();
-}
-
-function setDown(text) {
-  el.down.textContent = text;
-  el.down.classList.remove('swap');
-  void el.down.offsetWidth; // restart animation
-  el.down.classList.add('swap');
 }
 
 // Count the score up and flash the team block
@@ -174,7 +166,6 @@ async function runScoringDrive(name, forced) {
 
   state.ball = team;
   renderBall();
-  setDown(isFG ? '4TH & 6' : '1ST & GOAL');
   await wait(700);
 
   if (isFG) {
@@ -201,12 +192,6 @@ async function runScoringDrive(name, forced) {
 
   hideBanner();
   await wait(400);
-
-  // Kickoff — possession flips
-  state.ball = other(team);
-  saveState();
-  renderBall();
-  setDown('KICKOFF');
 }
 
 // Queue so back-to-back subs play out one at a time
@@ -226,15 +211,11 @@ setInterval(() => {
   if (state.clock % 10 === 0) saveState();
 }, 1000);
 
-// Drift the down & distance so the bug feels live
-setInterval(() => setDown(pick(DOWNS)), 20000);
-
 // ── Reset ─────────────────────────────────────────────────
 function resetGame() {
   state = freshState();
   saveState();
   renderAll();
-  setDown('1ST & 10');
 }
 
 // ── Keyboard triggers ─────────────────────────────────────

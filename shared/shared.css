@@ -148,6 +148,13 @@ body {
   100% { transform: translateX(-50%); }
 }
 
+/* ─── Icons (shared/icons.js) ─── */
+.icon {
+  width: 1em; height: 1em;
+  flex-shrink: 0;
+  vertical-align: -0.125em;
+}
+
 /* ─── Shared keyframes ─── */
 @keyframes fadeSlideUp {
   from { opacity: 0; transform: translateY(20px); }

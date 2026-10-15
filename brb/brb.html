@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Halftime</title>
+  <title>Be Right Back</title>
   <link rel="stylesheet" href="../shared/shared.css" />
-  <link rel="stylesheet" href="halftime.css" />
+  <link rel="stylesheet" href="brb.css" />
 </head>
 <body>
 
@@ -27,15 +27,12 @@
   <div class="corner corner--bl"></div>
   <div class="corner corner--br"></div>
 
-  <!-- Flash overlay -->
-  <div class="end-flash" id="endFlash"></div>
-
   <!-- Top bar -->
   <div class="topbar">
     <div class="logo"><span>■</span> StreamCenter</div>
     <div class="live-badge">
       <div class="live-dot active"></div>
-      <span id="topbarStatus">Halftime</span>
+      <span>BRB</span>
     </div>
     <div class="topbar-time" id="clock"></div>
   </div>
@@ -43,33 +40,18 @@
   <!-- Main stage -->
   <main class="stage">
 
-    <!-- Hero: HALFTIME title + countdown -->
+    <!-- Hero: BE RIGHT BACK title -->
     <div class="hero">
-      <div class="eyebrow" id="eyebrow">⚡ &nbsp; Halftime Break &nbsp; ⚡</div>
+      <div class="eyebrow" id="eyebrow"><span data-icon="zap"></span> &nbsp; Quick Break &nbsp; <span data-icon="zap"></span></div>
 
       <div class="title-wrap">
         <div class="title-bg-text">Break</div>
         <div class="title">
-          <span class="title-line1">HALF</span><span class="title-line2">TIME</span>
+          <span class="title-line1">BE RIGHT</span><span class="title-line2">BACK</span>
         </div>
       </div>
 
       <div class="divider"></div>
-
-      <!-- Countdown -->
-      <div class="countdown-wrap" id="countdownWrap">
-        <div class="countdown-label" id="countdownLabel">BACK IN</div>
-        <div class="countdown-display">
-          <span class="countdown-num" id="countMin">5</span>
-          <span class="countdown-colon" id="colon">:</span>
-          <span class="countdown-num" id="countSec">00</span>
-        </div>
-        <div class="countdown-hint" id="countdownHint">
-          <span class="hint-key">SPACE</span> Start &nbsp;·&nbsp;
-          <span class="hint-key">+</span><span class="hint-key">−</span> Time &nbsp;·&nbsp;
-          <span class="hint-key">R</span> Reset
-        </div>
-      </div>
     </div>
 
     <!-- Lower panels -->
@@ -85,11 +67,11 @@
         <ul class="wait-list" id="waitList"></ul>
       </div>
 
-      <!-- Halftime Report -->
+      <!-- Break Report -->
       <div class="panel report-panel">
         <div class="panel-header">
           <span class="panel-header-line"></span>
-          HALFTIME REPORT
+          BREAK REPORT
           <span class="panel-header-line"></span>
         </div>
         <div class="report-body">
@@ -98,11 +80,11 @@
         </div>
       </div>
 
-      <!-- Second Half teaser -->
+      <!-- Up Next teaser -->
       <div class="panel teaser-panel">
         <div class="panel-header">
           <span class="panel-header-line"></span>
-          SECOND HALF
+          UP NEXT
           <span class="panel-header-line"></span>
         </div>
         <div class="teaser-items" id="teaserItems"></div>
@@ -112,21 +94,15 @@
 
   </main>
 
-  <!-- "BACK TO IT" end screen (shown when timer hits 0) -->
-  <div class="end-screen" id="endScreen" style="display:none">
-    <div class="end-icon">🔥</div>
-    <div class="end-title">LET'S GET IT</div>
-    <div class="end-sub">Second half starts now</div>
-  </div>
-
   <!-- Ticker -->
   <div class="ticker-wrap">
-    <div class="ticker-tag">Halftime</div>
+    <div class="ticker-tag">BRB</div>
     <div class="ticker-track" id="tickerTrack"></div>
   </div>
 
   <script src="../shared/shared.js"></script>
   <script src="../shared/config.js"></script>
-  <script src="halftime.js"></script>
+  <script src="../shared/icons.js"></script>
+  <script src="brb.js"></script>
 </body>
 </html>

@@ -25,7 +25,7 @@
 const ALERT_TYPES = {
   follow: {
     type:      'NEW FOLLOWER',
-    icon:      '🔔',
+    icon:      'heart',
     color:     '#CC1500',
     hold:      4500,
     getName:   d => d.name || 'Someone',
@@ -34,7 +34,7 @@ const ALERT_TYPES = {
   },
   sub: {
     type:      'NEW SUBSCRIBER',
-    icon:      '⭐',
+    icon:      'star',
     color:     '#C8920A',
     hold:      5500,
     getName:   d => d.name || 'Someone',
@@ -43,7 +43,7 @@ const ALERT_TYPES = {
   },
   resub: {
     type:      'RESUBSCRIBED',
-    icon:      '🔁',
+    icon:      'repeat',
     color:     '#C8920A',
     hold:      5500,
     getName:   d => d.name || 'Someone',
@@ -52,7 +52,7 @@ const ALERT_TYPES = {
   },
   cheer: {
     type:      'BITS ALERT',
-    icon:      '💥',
+    icon:      'gem',
     color:     '#6B21A8',
     hold:      5000,
     getName:   d => d.name || 'Someone',
@@ -61,7 +61,7 @@ const ALERT_TYPES = {
   },
   raid: {
     type:      'INCOMING RAID',
-    icon:      '⚡',
+    icon:      'zap',
     color:     '#CC1500',
     hold:      7000,
     getName:   d => d.name || 'Someone',
@@ -70,7 +70,7 @@ const ALERT_TYPES = {
   },
   gift: {
     type:      'GIFTED SUB',
-    icon:      '🎁',
+    icon:      'gift',
     color:     '#CC1500',
     hold:      5000,
     getName:   d => d.name || 'Someone',
@@ -103,7 +103,7 @@ let eventChannel = null;
 try { eventChannel = new BroadcastChannel('stream-events'); } catch (e) {}
 
 function enqueue(type, data = {}, fromTwitch = false) {
-  if (eventChannel && !fromTwitch) eventChannel.postMessage({ type, name: data.name, count: data.count });
+  if (eventChannel && !fromTwitch) eventChannel.postMessage({ type, ...data });
   queue.push({ type, data });
   if (!isShowing) showNext();
 }
@@ -128,7 +128,7 @@ function showAlert(type, data) {
   card.innerHTML = `
     <div class="alert-top-wrap">
       <div class="alert-top">
-        <div class="top-badge">${cfg.icon}</div>
+        <div class="top-badge">${icon(cfg.icon)}</div>
         <div class="top-sep"></div>
         <div class="top-type">${cfg.type}</div>
         <div class="top-live">

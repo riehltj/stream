@@ -32,7 +32,12 @@ function initParticles(containerId, count = 22) {
 }
 
 // ─── Ticker ───────────────────────────────────────────────────
-// Call initTicker('trackId', ['item 1', 'item 2', ...]) in your scene JS
+// Call initTicker('trackId', ['item 1', 'item 2', ...]) in your scene JS.
+// tickerItems('brb') builds that list from TICKER in shared/config.js.
+function tickerItems(scene) {
+  return [...TICKER.all, ...(TICKER[scene] || [])];
+}
+
 function initTicker(trackId, items) {
   const track = document.getElementById(trackId);
   const doubled = [...items, ...items]; // seamless loop

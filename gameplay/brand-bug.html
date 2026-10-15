@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brand Bug</title>
+  <link rel="stylesheet" href="../shared/shared.css" />
+  <link rel="stylesheet" href="gameplay.css" />
+</head>
+<body>
+
+  <!-- Browser source size: 350 × 34 -->
+  <div class="brand-bug">
+    <div class="bug-logo"><span>■</span> <span id="bugBrand">StreamCenter</span></div>
+    <div class="bug-live"><div class="live-dot active"></div>Live</div>
+    <div class="bug-time" id="clock"></div>
+  </div>
+
+  <script src="../shared/shared.js"></script>
+  <script src="../shared/config.js"></script>
+  <script>
+    document.getElementById('bugBrand').textContent = STREAMER.brand;
+    initClock('clock');
+  </script>
+</body>
+</html>

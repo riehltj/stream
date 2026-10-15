@@ -19,17 +19,17 @@
 
     <!-- Score bug -->
     <div class="scorebug">
-      <div class="sb-brand" id="brand"></div>
-
       <div class="team team--home" id="teamHome">
+        <div class="team-rank" id="homeRank"></div>
         <div class="team-name" id="homeName"></div>
-        <div class="team-poss">🏈</div>
+        <div class="team-poss" data-icon="football"></div>
         <div class="team-score" id="homeScore">0</div>
       </div>
 
       <div class="team team--away" id="teamAway">
+        <div class="team-rank" id="awayRank"></div>
         <div class="team-name" id="awayName"></div>
-        <div class="team-poss">🏈</div>
+        <div class="team-poss" data-icon="football"></div>
         <div class="team-score" id="awayScore">0</div>
       </div>
 
@@ -37,8 +37,6 @@
         <div class="sb-qtr" id="qtr">1ST</div>
         <div class="sb-time" id="gameClock">15:00</div>
       </div>
-
-      <div class="sb-down" id="downDist">1ST &amp; 10</div>
     </div>
 
   </div>
@@ -46,6 +44,7 @@
   <script src="../shared/config.js"></script>
   <script src="../shared/twitch-secrets.js"></script>
   <script src="../shared/twitch.js"></script>
+  <script src="../shared/icons.js"></script>
   <script src="scoreboard.js"></script>
 </body>
 </html>
